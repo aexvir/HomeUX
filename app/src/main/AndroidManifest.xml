@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.dravite.newlayouttest">
+    package="com.dravite.homeux">
 
     <uses-permission android:name="android.permission.VIBRATE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -28,7 +28,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:windowSoftInputMode="adjustResize"
-            android:name=".LauncherActivity"
+            android:name="com.dravite.homeux.LauncherActivity"
             android:excludeFromRecents="true"
             android:taskAffinity=""
             android:label="@string/app_name"
@@ -43,127 +43,127 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".settings.SettingsActivity"
+        <activity android:name="com.dravite.homeux.settings.SettingsActivity"
             android:label="@string/activity_settings"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Cyan"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".add_quick_action.AddQuickActionActivity"
+        <activity android:name="com.dravite.homeux.add_quick_action.AddQuickActionActivity"
             android:label="@string/activity_add_qa"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Cyan"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".app_editor.AppEditorActivity"
+        <activity android:name="com.dravite.homeux.app_editor.AppEditorActivity"
             android:label="@string/activity_app_editor"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Cyan"
-            android:parentActivityName=".LauncherActivity"
+            android:parentActivityName="com.dravite.homeux.LauncherActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".app_editor.AppEditorIconPackActivity"
+        <activity android:name="com.dravite.homeux.app_editor.AppEditorIconPackActivity"
             android:label="@string/activity_app_editor_icon_packs"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Cyan"
-            android:parentActivityName=".app_editor.AppEditorActivity"
+            android:parentActivityName="com.dravite.homeux.app_editor.AppEditorActivity"
             android:screenOrientation="portrait">
             </activity>
 
-        <activity android:name=".app_editor.AppEditorIconSelectActivity"
+        <activity android:name="com.dravite.homeux.app_editor.AppEditorIconSelectActivity"
             android:label="@string/activity_app_editor_icons"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Cyan"
-            android:parentActivityName=".app_editor.AppEditorActivity"
+            android:parentActivityName="com.dravite.homeux.app_editor.AppEditorActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".folder_editor.FolderEditorActivity"
+        <activity android:name="com.dravite.homeux.folder_editor.FolderEditorActivity"
             android:label="@string/activity_folder_editor_new"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Cyan"
-            android:parentActivityName=".LauncherActivity"
+            android:parentActivityName="com.dravite.homeux.LauncherActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".folder_editor.FolderEditorAddActivity"
+        <activity android:name="com.dravite.homeux.folder_editor.FolderEditorAddActivity"
             android:label="@string/activity_add_apps_to_folder"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Cyan"
-            android:parentActivityName=".folder_editor.FolderEditorActivity"
+            android:parentActivityName="com.dravite.homeux.folder_editor.FolderEditorActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".folder_editor.SelectFolderIconActivity"
+        <activity android:name="com.dravite.homeux.folder_editor.SelectFolderIconActivity"
             android:label="@string/select_icon"
             android:launchMode="singleInstance"
             android:theme="@style/AppTheme.Cyan"
-            android:parentActivityName=".folder_editor.FolderEditorActivity"
+            android:parentActivityName="com.dravite.homeux.folder_editor.FolderEditorActivity"
             android:screenOrientation="portrait">
         </activity>
 
-        <activity android:name=".settings.hidden_apps.HiddenAppsActivity"
+        <activity android:name="com.dravite.homeux.settings.hidden_apps.HiddenAppsActivity"
             android:launchMode="singleInstance"
             android:label="@string/activity_hidden_apps"
             android:theme="@style/AppTheme.Cyan"
-            android:parentActivityName=".settings.SettingsActivity"
+            android:parentActivityName="com.dravite.homeux.settings.SettingsActivity"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".welcome.WelcomeActivity"
+        <activity android:name="com.dravite.homeux.welcome.WelcomeActivity"
             android:launchMode="singleInstance"
             android:label="@string/activity_welcome_first"
             android:theme="@style/AppTheme.Slide"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".welcome.WelcomeActivityQuickApps"
-            android:launchMode="singleInstance"
-            android:label="@string/activity_welcome_first"
-            android:theme="@style/AppTheme.Slide"
-            android:screenOrientation="portrait"/>
-
-
-        <activity android:name=".welcome.WelcomeActivityFoldersInfo"
+        <activity android:name="com.dravite.homeux.welcome.WelcomeActivityQuickApps"
             android:launchMode="singleInstance"
             android:label="@string/activity_welcome_first"
             android:theme="@style/AppTheme.Slide"
             android:screenOrientation="portrait"/>
 
 
-        <activity android:name=".welcome.WelcomeActivityWidgetsInfo"
+        <activity android:name="com.dravite.homeux.welcome.WelcomeActivityFoldersInfo"
             android:launchMode="singleInstance"
             android:label="@string/activity_welcome_first"
             android:theme="@style/AppTheme.Slide"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".welcome.WelcomeActivityFolders"
+
+        <activity android:name="com.dravite.homeux.welcome.WelcomeActivityWidgetsInfo"
             android:launchMode="singleInstance"
             android:label="@string/activity_welcome_first"
             android:theme="@style/AppTheme.Slide"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".welcome.WelcomeActivityTopPanelInfo"
+        <activity android:name="com.dravite.homeux.welcome.WelcomeActivityFolders"
             android:launchMode="singleInstance"
             android:label="@string/activity_welcome_first"
             android:theme="@style/AppTheme.Slide"
             android:screenOrientation="portrait"/>
 
-        <activity android:name=".settings.backup_restore.BackupRestoreActivity"
+        <activity android:name="com.dravite.homeux.welcome.WelcomeActivityTopPanelInfo"
+            android:launchMode="singleInstance"
+            android:label="@string/activity_welcome_first"
+            android:theme="@style/AppTheme.Slide"
+            android:screenOrientation="portrait"/>
+
+        <activity android:name="com.dravite.homeux.settings.backup_restore.BackupRestoreActivity"
             android:launchMode="singleInstance"
             android:label="@string/activity_backup_restore"
             android:theme="@style/AppTheme.Cyan"
             android:screenOrientation="portrait"/>
 
 
-        <activity android:name=".settings.clock.ActivityClockSettings"
+        <activity android:name="com.dravite.homeux.settings.clock.ActivityClockSettings"
                   android:launchMode="singleInstance"
                   android:label="@string/category_clock_widget"
                   android:theme="@style/AppTheme.Settings"
                   android:screenOrientation="portrait"/>
 
-        <service android:name=".general_helpers.notifications.NotificationListener"
+        <service android:name="com.dravite.homeux.general_helpers.notifications.NotificationListener"
             android:label="@string/app_name"
             android:permission="android.permission.BIND_NOTIFICATION_LISTENER_SERVICE">
             <intent-filter>
@@ -171,7 +171,7 @@
             </intent-filter>
         </service>
 
-        <receiver android:name=".general_helpers.LicensingBroadcastReceiver"
+        <receiver android:name="com.dravite.homeux.general_helpers.LicensingBroadcastReceiver"
             android:permission="com.dravite.licensing"
             android:exported="true">
             <intent-filter>
