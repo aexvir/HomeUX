@@ -70,7 +70,7 @@
                 android:textColor="#fff"
                 android:layout_centerHorizontal="true" />
 
-            <com.dravite.newlayouttest.views.TextDate
+            <com.dravite.homeux.views.TextDate
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="?attr/selectableItemBackground"
@@ -202,7 +202,7 @@
                         android:layout_height="wrap_content"
                         android:padding="0dp">
 
-                        <com.dravite.newlayouttest.views.ToggleImageButton
+                        <com.dravite.homeux.views.ToggleImageButton
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:background="@drawable/selectable_option_drawable"
@@ -213,7 +213,7 @@
                             android:clickable="true"
                             android:tint="#848484"/>
 
-                        <com.dravite.newlayouttest.views.ToggleImageButton
+                        <com.dravite.homeux.views.ToggleImageButton
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:background="@drawable/selectable_option_drawable"
@@ -238,7 +238,7 @@
                         android:layout_height="wrap_content"
                         >
 
-                        <com.dravite.newlayouttest.views.ToggleImageButton
+                        <com.dravite.homeux.views.ToggleImageButton
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:background="@drawable/selectable_option_drawable"
@@ -247,7 +247,7 @@
                             android:src="@drawable/ic_format_bold_black_24dp"
                             android:tint="#848484"/>
 
-                        <com.dravite.newlayouttest.views.ToggleImageButton
+                        <com.dravite.homeux.views.ToggleImageButton
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:background="@drawable/selectable_option_drawable"
@@ -269,7 +269,7 @@
                         android:layout_height="wrap_content"
                         >
 
-                        <com.dravite.newlayouttest.views.ToggleImageButton
+                        <com.dravite.homeux.views.ToggleImageButton
                             android:layout_width="56dp"
                             android:layout_height="56dp"
                             android:background="@drawable/selectable_option_drawable"

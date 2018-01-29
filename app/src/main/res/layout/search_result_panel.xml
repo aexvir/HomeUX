@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.dravite.newlayouttest.views.SearchResultLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<com.dravite.homeux.views.SearchResultLayout xmlns:android="http://schemas.android.com/apk/res/android"
                                                     android:orientation="vertical" android:layout_width="match_parent"
                                                     android:layout_height="match_parent"
                                                     android:background="@android:color/white"
@@ -20,4 +20,4 @@
 
     </android.support.v7.widget.RecyclerView>
 
-</com.dravite.newlayouttest.views.SearchResultLayout>
+</com.dravite.homeux.views.SearchResultLayout>

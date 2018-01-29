@@ -16,13 +16,13 @@
     app:cardCornerRadius="2dp"
     app:elevation="4dp">
 
-    <com.dravite.newlayouttest.views.CustomGridLayout
+    <com.dravite.homeux.views.CustomGridLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/appGrid"
         android:rowCount="4"
         android:columnCount="4">
-    </com.dravite.newlayouttest.views.CustomGridLayout>
+    </com.dravite.homeux.views.CustomGridLayout>
 
 </android.support.v7.widget.CardView>
 </FrameLayout>

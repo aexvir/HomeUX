@@ -9,7 +9,7 @@
         android:layout_height="64dp"
         android:layout_marginTop="24dp" />
 
-    <com.dravite.newlayouttest.views.DragSurfaceLayout
+    <com.dravite.homeux.views.DragSurfaceLayout
         android:id="@+id/dragView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -33,7 +33,7 @@
             android:transformPivotX="0dp"
             android:visibility="visible" />
 
-        <com.dravite.newlayouttest.views.ObjectDropButtonStrip
+        <com.dravite.homeux.views.ObjectDropButtonStrip
             android:id="@+id/widgetArea"
             android:layout_width="match_parent"
             android:layout_height="80dp"
@@ -44,15 +44,15 @@
             android:elevation="2dp">
 
             <include layout="@layout/widget_remove_button" />
-        </com.dravite.newlayouttest.views.ObjectDropButtonStrip>
+        </com.dravite.homeux.views.ObjectDropButtonStrip>
 
-        <com.dravite.newlayouttest.views.VerticalViewPager
+        <com.dravite.homeux.views.VerticalViewPager
             android:id="@+id/homePager"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             app:elevation="2dp">
 
-        </com.dravite.newlayouttest.views.VerticalViewPager>
+        </com.dravite.homeux.views.VerticalViewPager>
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/floatingActionButton"

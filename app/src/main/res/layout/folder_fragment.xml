@@ -5,7 +5,7 @@
              android:layout_width="match_parent"
              android:layout_height="match_parent">
 
-    <com.dravite.newlayouttest.views.FolderNameLabel
+    <com.dravite.homeux.views.FolderNameLabel
         android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="24dp"
@@ -33,7 +33,7 @@
         android:layout_marginTop="221dp"
         android:layout_marginBottom="0dp"/>
     
-    <com.dravite.newlayouttest.views.IndicatorView
+    <com.dravite.homeux.views.IndicatorView
         android:id="@+id/indicatorView"
         app:dotColor="#fff"
         app:dotCount="5"

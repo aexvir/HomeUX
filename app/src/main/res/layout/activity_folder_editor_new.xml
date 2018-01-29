@@ -154,7 +154,7 @@
                 android:clickable="true"
                 android:id="@+id/primarySelector">
 
-                <com.dravite.newlayouttest.views.RoundImageView
+                <com.dravite.homeux.views.RoundImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="16dp"
@@ -201,7 +201,7 @@
                 android:clickable="true"
                 android:id="@+id/accentSelector">
 
-                <com.dravite.newlayouttest.views.RoundImageView
+                <com.dravite.homeux.views.RoundImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="16dp"
@@ -256,7 +256,7 @@
                 android:clickable="true"
                 android:id="@+id/appSelector">
 
-                <com.dravite.newlayouttest.views.RoundImageView
+                <com.dravite.homeux.views.RoundImageView
                     android:layout_width="32dp"
                     android:layout_height="32dp"
                     android:layout_marginStart="16dp"
