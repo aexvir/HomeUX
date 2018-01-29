@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/quick_settings_bg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#65000000"
+        android:elevation="2dp"
+        android:paddingTop="25dp">
+
+    <com.dravite.newlayouttest.views.QuickSettingsButton
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:drawableTop="@drawable/ic_wallpaper_black_24dp"
+        android:elevation="4dp"
+        android:text="@string/menu_action_wallpaper"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/bt_wallpaper" />
+
+    <com.dravite.newlayouttest.views.QuickSettingsButton
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:drawableTop="@drawable/ic_apps_black_24dp"
+        android:elevation="4dp"
+        android:text="@string/menu_action_icon_pack"
+        android:layout_gravity="center_vertical"
+        android:id="@+id/bt_icon_pack" />
+
+    <com.dravite.newlayouttest.views.QuickSettingsButton
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_vertical"
+        android:textStyle="bold"
+        android:drawableTop="@drawable/ic_settings_black_24dp"
+        android:elevation="4dp"
+        android:text="@string/menu_action_ux_settings"
+        android:id="@+id/bt_settings" />
+
+    </LinearLayout>
+</LinearLayout>

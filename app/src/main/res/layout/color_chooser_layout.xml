@@ -1,0 +1,124 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/colorLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@android:style/Theme.Material.Light"
+    tools:context=".LauncherActivity">
+
+    <EditText
+        android:id="@+id/hexValue"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignStart="@+id/value"
+        android:hint="Hex value"
+        android:layout_toStartOf="@+id/submitButton"
+        android:imeOptions="actionDone"
+        android:singleLine="true" />
+
+    <SeekBar
+        android:id="@+id/value"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/hexValue"
+        android:layout_alignParentBottom="false"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-8dp"
+        android:max="1000" />
+
+    <TextView
+        android:id="@+id/valueLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/value"
+        android:layout_alignParentTop="false"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/brightness" />
+
+    <SeekBar
+        android:id="@+id/saturation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/valueLabel"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-8dp"
+        android:max="1000" />
+
+    <TextView
+        android:id="@+id/saturationLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/saturation"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/saturation" />
+
+    <SeekBar
+        android:id="@+id/hue"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/saturationLabel"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="-8dp"
+        android:max="360" />
+
+    <TextView
+        android:id="@+id/colorLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/hue"
+        android:layout_alignParentStart="true"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginTop="8dp"
+        android:text="@string/color" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/presets"
+        android:layout_width="48dp"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/colorLabel"
+        android:layout_alignParentRight="true" />
+
+    <View
+        android:id="@+id/colorView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/colorLabel"
+        android:layout_toLeftOf="@+id/presets"
+        android:background="#93949f" />
+
+    <Button
+        android:id="@+id/switchTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="false"
+        android:layout_alignParentTop="false"
+        android:layout_alignTop="@+id/colorView"
+        android:layout_toStartOf="@+id/presets"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Switch to accent" />
+
+    <ImageButton
+        android:id="@+id/submitButton"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignEnd="@+id/valueLabel"
+        android:layout_below="@+id/value"
+        android:background="?android:attr/selectableItemBackgroundBorderless"
+        android:tint="@android:color/white"
+        android:src="@drawable/ic_okay" />
+
+
+</RelativeLayout>

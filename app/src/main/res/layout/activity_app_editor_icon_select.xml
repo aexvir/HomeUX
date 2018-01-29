@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/colorPrimary"
+        android:elevation="4dp"
+        android:popupTheme="@android:style/ThemeOverlay.Material.Light"
+        android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
+        android:transitionName="myToolbar">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+                <android.support.v7.widget.SearchView
+                    android:theme="@android:style/ThemeOverlay.Material.Dark.ActionBar"
+                    android:layout_gravity="end"
+                    android:gravity="end"
+                    app:queryHint="Icon keyword"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:id="@+id/searchView"/>
+        </RelativeLayout>
+    </android.support.v7.widget.Toolbar>
+
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/progress"
+        android:layout_gravity="center_horizontal"
+        android:layout_centerInParent="true"/>
+
+    <TextView
+        android:id="@+id/loadingText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/load_icons"
+        android:gravity="center_horizontal"
+        android:layout_gravity="center_horizontal"
+        android:layout_below="@id/progress"
+        android:padding="8dp"/>
+
+    <android.support.v7.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/icon_list"
+        android:layout_below="@id/toolbar"
+        android:layout_width="match_parent" android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</RelativeLayout>

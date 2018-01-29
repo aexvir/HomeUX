@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:background="?attr/colorPrimary"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:minHeight="?android:attr/actionBarSize"/>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="44dp"
+        android:layout_below="@+id/toolbar"
+        android:background="@android:color/white"
+        android:elevation="4dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/frameLayout">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textColor="#000"
+            android:alpha="0.57"
+            android:text="Please select an icon for this Folder"
+            android:id="@+id/textView4"
+            android:layout_gravity="start|center_vertical"
+            android:layout_marginStart="16dp"
+            android:layout_marginEnd="16dp"/>
+    </FrameLayout>
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="8dp"
+        android:scrollbars="vertical"
+        android:scrollbarSize="8dp"
+        android:scrollbarStyle="insideInset"
+        android:paddingBottom="20dp"
+        android:clipToPadding="false"
+        android:clipChildren="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/icon_list"
+        android:layout_below="@+id/frameLayout"/>
+</RelativeLayout>

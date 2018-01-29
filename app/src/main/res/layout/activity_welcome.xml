@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:clickable="true">
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="#009688"
+        android:scaleType="centerCrop"/>
+
+    <!--<android.support.design.widget.FloatingActionButton-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--app:backgroundTint="#ef6e47"-->
+        <!--android:src="@drawable/ic_next"-->
+        <!--android:tint="#fff"-->
+        <!--android:id="@+id/fab"-->
+        <!--android:layout_alignParentBottom="true"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_marginTop="16dp"-->
+        <!--android:layout_marginBottom="170dp" />-->
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#00796B"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@android:color/white"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_next"
+            android:padding="12dp"/>
+
+
+        <Button
+            android:id="@+id/skip"
+            android:layout_width="wrap_content"
+            android:paddingEnd="16dp"
+            android:paddingStart="16dp"
+            android:background="?android:selectableItemBackground"
+            android:layout_height="56dp"
+            android:backgroundTint="#ef6e47"
+            android:textColor="@android:color/white"
+            android:text="Skip tutorial"/>
+
+        <Button
+            android:id="@+id/start"
+            android:gravity="right|center_vertical"
+            android:paddingRight="56dp"
+            android:layout_toRightOf="@id/skip"
+            android:layout_width="match_parent"
+            android:background="?android:selectableItemBackground"
+            android:layout_height="56dp"
+            android:backgroundTint="#ef6e47"
+            android:textColor="@android:color/white"
+            android:text="Start"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/textContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="128dp"
+            android:layout_height="128dp"
+            android:src="@drawable/web_hi_res_512"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="@string/activity_welcome_first"
+            android:id="@+id/title"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/img"
+            android:textStyle="bold"
+            android:layout_centerHorizontal="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceSmall"
+            android:text="@string/welcome_info"
+            android:gravity="center"
+            android:id="@+id/info"
+            android:textColor="@android:color/white"
+            android:layout_below="@id/title"
+            android:layout_centerHorizontal="true" />
+    </RelativeLayout>
+
+</RelativeLayout>

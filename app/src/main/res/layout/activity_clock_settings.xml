@@ -1,0 +1,288 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              xmlns:app="http://schemas.android.com/apk/res-auto"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:elevation="4dp"
+        android:background="#ffffff"
+        android:clipToPadding="false"
+        android:clipChildren="false">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="?actionBarSize"
+            android:layout_gravity="center_horizontal"
+            android:background="#2196F3">
+
+            <Switch
+                android:theme="@style/AppTheme.WhiteSwitch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/clockSwitch"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_centerVertical="true"
+                android:layout_alignParentEnd="true"/>
+
+            <ImageButton
+                android:layout_width="56dp"
+                android:layout_height="match_parent"
+                android:id="@+id/backArrow"
+                android:layout_centerVertical="true"
+                android:layout_alignParentStart="true"
+                android:background="?android:selectableItemBackground"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:tint="#fff"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="168dp"
+            android:layout_gravity="center_horizontal"
+            android:background="#2196F3">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.12"
+                android:layout_alignParentTop="true"
+                android:background="#000000"/>
+
+            <TextClock
+                android:background="?attr/selectableItemBackground"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textClock"
+                android:layout_alignParentTop="true"
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="16dp"
+                android:paddingEnd="32dp"
+                android:paddingStart="32dp"
+                android:textSize="65sp"
+                android:layout_marginBottom="-10dp"
+                android:textColor="#fff"
+                android:layout_centerHorizontal="true" />
+
+            <com.dravite.newlayouttest.views.TextDate
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="?attr/selectableItemBackground"
+                android:id="@+id/dateView"
+                android:textSize="14sp"
+                android:paddingEnd="24dp"
+                android:paddingStart="24dp"
+                android:letterSpacing="0.1"
+                android:textColor="#fff"
+                android:fontFamily="sans-serif-light"
+                android:textStyle="bold"
+                android:textAllCaps="true"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:layout_below="@+id/textClock"
+                android:layout_centerHorizontal="true" />
+
+            <LinearLayout
+                android:orientation="horizontal"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginRight="88dp"
+                android:alpha="0.37">
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/imageView4"
+                    android:src="@drawable/circle_white"
+                    android:layout_weight="1"
+                    android:layout_margin="12dp"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/circle_white"
+                    android:layout_weight="1"
+                    android:layout_margin="12dp"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/circle_white"
+                    android:layout_weight="1"
+                    android:layout_margin="12dp"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/circle_white"
+                    android:layout_weight="1"
+                    android:layout_margin="12dp"/>
+
+                <ImageView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/circle_white"
+                    android:layout_weight="1"
+                    android:layout_margin="12dp"/>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#fff"
+            android:scrollIndicators="none">
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horizontalScrollView"
+                android:scrollIndicators="none">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:layout_gravity="center_vertical"
+                    android:gravity="center_vertical">
+
+                    <Spinner
+                        android:layout_width="192dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner"
+                        android:padding="0dp"
+                        android:layout_margin="4dp"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:alpha="0.12"
+                        android:background="#000000"/>
+
+                    <Spinner
+                        android:layout_width="150dp"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/spinner2"
+                        android:padding="0dp"
+                        android:layout_margin="4dp"/>
+                </LinearLayout>
+            </HorizontalScrollView>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:alpha="0.12"
+                android:background="#000000"/>
+
+            <HorizontalScrollView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/horizontalScrollView2">
+
+                <LinearLayout
+                    android:orientation="horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:gravity="center_vertical"
+                    >
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="0dp">
+
+                        <com.dravite.newlayouttest.views.ToggleImageButton
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/selectable_option_drawable"
+                            android:id="@+id/btn_align_left"
+                            android:layout_margin="4dp"
+                            android:src="@drawable/ic_format_align_left_black_24dp"
+                            app:only_check_no_uncheck="true"
+                            android:clickable="true"
+                            android:tint="#848484"/>
+
+                        <com.dravite.newlayouttest.views.ToggleImageButton
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/selectable_option_drawable"
+                            android:id="@+id/btn_align_center"
+                            android:layout_margin="4dp"
+                            android:src="@drawable/ic_format_align_center_black_24dp"
+                            app:only_check_no_uncheck="true"
+                            android:checked="true"
+                            android:clickable="true"
+                            android:tint="#848484"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:alpha="0.12"
+                        android:background="#000000"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <com.dravite.newlayouttest.views.ToggleImageButton
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/selectable_option_drawable"
+                            android:id="@+id/btn_toggle_bold"
+                            android:layout_margin="4dp"
+                            android:src="@drawable/ic_format_bold_black_24dp"
+                            android:tint="#848484"/>
+
+                        <com.dravite.newlayouttest.views.ToggleImageButton
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/selectable_option_drawable"
+                            android:id="@+id/btn_toggle_italic"
+                            android:layout_margin="4dp"
+                            android:src="@drawable/ic_format_italic_black_24dp"
+                            android:tint="#848484"/>
+                    </LinearLayout>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:alpha="0.12"
+                        android:background="#000000"/>
+
+                    <LinearLayout
+                        android:orientation="horizontal"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        >
+
+                        <com.dravite.newlayouttest.views.ToggleImageButton
+                            android:layout_width="56dp"
+                            android:layout_height="56dp"
+                            android:background="@drawable/selectable_option_drawable"
+                            android:id="@+id/btn_am_pm"
+                            android:layout_margin="4dp"
+                            android:src="@drawable/ic_am_pm"/>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+        </LinearLayout>
+
+    </LinearLayout>
+</LinearLayout>

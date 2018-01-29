@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFC107">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="You can add your QuickApps here or just drag an app you like onto the QuickApp-bar."
+        android:id="@+id/textView6"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+
+    <LinearLayout
+        android:id="@+id/quickAppLayout"
+        android:layout_marginTop="8dp"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:layout_below="@id/textView6"
+        android:layout_width="match_parent"
+        android:layout_height="64dp">
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/tic_add_24dp"
+            android:layout_weight="1"
+            android:tint="@android:color/white"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/tic_add_24dp"
+            android:layout_weight="1"
+            android:tint="@android:color/white"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/tic_add_24dp"
+            android:layout_weight="1"
+            android:tint="@android:color/white"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/tic_add_24dp"
+            android:layout_weight="1"
+            android:tint="@android:color/white"/>
+        <ImageButton
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:background="?android:selectableItemBackgroundBorderless"
+            android:src="@drawable/tic_add_24dp"
+            android:layout_weight="1"
+            android:tint="@android:color/white"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#FFA000"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@android:color/white"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_next"
+            android:padding="12dp"/>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:background="?android:selectableItemBackground"
+            android:layout_height="56dp"
+            android:textColor="@android:color/white"
+            android:text="Next Step"/>
+
+    </RelativeLayout>
+
+    <ImageView
+        android:padding="16dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerInside"
+        android:src="@drawable/info_quickapps"
+        android:layout_above="@id/bottomPanel"
+        android:layout_below="@id/quickAppLayout"/>
+</RelativeLayout>
