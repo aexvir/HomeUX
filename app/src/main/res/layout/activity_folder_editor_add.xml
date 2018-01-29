@@ -1,0 +1,109 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/contentLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/white">
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
+        android:elevation="4dp">
+        <Button
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:text="@android:string/ok"
+            android:paddingLeft="8dp"
+            android:paddingRight="8dp"
+            android:background="?android:selectableItemBackground"
+            android:id="@+id/save"
+            android:layout_gravity="end"/>
+    </android.support.v7.widget.Toolbar>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_marginTop="?attr/actionBarSize"
+        android:layout_height="match_parent">
+
+        <LinearLayout android:orientation="horizontal" android:layout_width="match_parent"
+                      android:layout_height="72dp"
+                      android:id="@+id/hide_option"
+                      android:layout_alignParentBottom="true"
+                      android:background="@drawable/ripple_colored_white_darkripple"
+            android:elevation="12dp">
+
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_height="match_parent"
+                android:alpha="0.57"
+                android:tint="@android:color/black"
+                android:src="@drawable/ic_visibility_off_black_24dp"
+                android:id="@+id/icon" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:orientation="vertical"
+                android:layout_weight="1">
+                <TextView
+                    android:id="@+id/title_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Hide used apps"
+                    android:textColor="@android:color/black"
+                    android:alpha="0.89"
+                    android:textSize="14sp"/>
+                <TextView
+                    android:id="@+id/desc_text"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Don’t display apps which are already in another folder"
+                    android:textColor="@android:color/black"
+                    android:alpha="0.57"
+                    android:textSize="12sp"/>
+            </LinearLayout>
+
+            <Switch
+                android:id="@+id/pswitch"
+                android:padding="2dp"
+                android:layout_marginEnd="14dp"
+                android:layout_marginStart="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+
+        <CheckBox
+            android:visibility="gone"
+            android:id="@+id/hideAppsInAnotherFolder"
+            android:layout_marginBottom="20dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:textSize="12sp"
+            android:textColor="#9000"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hide apps which are already contained in another folder."/>
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/appGrid"
+            android:layout_height="match_parent"
+            android:layout_width="match_parent"
+            android:layout_above="@id/hide_option"
+            android:paddingTop="8dp"
+            android:paddingBottom="20dp"
+            android:paddingStart="16dp"
+            android:paddingEnd="16dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"/>
+
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

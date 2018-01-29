@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="8dp" android:elevation="4dp"
+    android:visibility="gone"
+    android:id="@+id/searchInputLayout"
+            android:background="#607D8B">
+
+            <ImageButton
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:src="@drawable/ic_arrow_back_black_24dp"
+                android:tint="@android:color/white"
+                android:background="?android:selectableItemBackgroundBorderless"
+                android:id="@+id/searchBackButton" />
+            <EditText
+                android:background="@null"
+                android:hint="Search app or contact"
+                android:singleLine="true"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/white"
+                android:textColorHint="#91ffffff"
+                android:id="@+id/searchInput"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:imeOptions="actionDone"/>
+
+    <ImageButton
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:src="@drawable/ic_clear_black_24dp"
+        android:tint="@android:color/white"
+        android:background="?android:selectableItemBackgroundBorderless"
+        android:id="@+id/searchClearButton" />
+        </LinearLayout>

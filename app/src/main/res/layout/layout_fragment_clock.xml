@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent" android:layout_height="match_parent"
+    android:background="@android:color/transparent">
+
+    <TextClock
+        android:background="?attr/selectableItemBackground"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:id="@+id/textClock"
+    android:layout_alignParentTop="true"
+        android:fontFamily="sans-serif"
+    android:layout_marginTop="41dp"
+        android:paddingEnd="32dp"
+        android:paddingStart="32dp"
+    android:textSize="65sp"
+    android:layout_marginBottom="-10dp"
+    android:textColor="#fff"
+    android:layout_centerHorizontal="true" />
+
+    <com.dravite.newlayouttest.views.TextDate
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
+        android:id="@+id/dateView"
+        android:textSize="14sp"
+        android:paddingEnd="24dp"
+        android:paddingStart="24dp"
+        android:letterSpacing="0.1"
+        android:textColor="#fff"
+        android:fontFamily="sans-serif-light"
+        android:textStyle="bold"
+        android:textAllCaps="true"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@+id/textClock"
+        android:layout_centerHorizontal="true" />
+
+    <com.dravite.newlayouttest.views.QuickAppBar
+        android:layout_width="match_parent"
+        android:layout_height="80dp"
+        android:id="@+id/quick_action_bar"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:background="@android:color/transparent"
+        android:layout_alignParentBottom="true" />
+</RelativeLayout>

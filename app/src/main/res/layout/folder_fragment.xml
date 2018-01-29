@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:orientation="vertical"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent">
+
+    <com.dravite.newlayouttest.views.FolderNameLabel
+        android:id="@+id/name"
+        android:layout_width="wrap_content"
+        android:layout_height="24dp"
+        android:layout_marginTop="202dp"
+        android:letterSpacing="0.1"
+        android:layout_marginStart="16dp"
+        android:drawableStart="@drawable/ic_folder"
+        style="?android:textAppearanceSmall"
+        android:shadowColor="#a000"
+        android:shadowDx="1"
+        android:shadowDy="1.5"
+        android:shadowRadius="2"
+        android:gravity="center"
+        android:drawablePadding="16dp"
+        android:fontFamily="sans-serif-medium"
+        android:textColor="#fff"
+        android:text="Some Folder"/>
+
+    <android.support.v4.view.ViewPager
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:id="@+id/folder_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="221dp"
+        android:layout_marginBottom="0dp"/>
+    
+    <com.dravite.newlayouttest.views.IndicatorView
+        android:id="@+id/indicatorView"
+        app:dotColor="#fff"
+        app:dotCount="5"
+        android:layout_width="match_parent"
+        android:layout_height="12dp"
+        android:visibility="gone"
+        android:layout_gravity="bottom"
+        android:gravity="bottom"/>
+
+</FrameLayout>

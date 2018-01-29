@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#4CAF50">
+
+    <FrameLayout
+        android:id="@+id/dragLayer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="1dp"
+        android:clickable="false"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Add all the widgets and Shortcuts you like through a long press on the screen."
+        android:id="@+id/textView6"
+        android:textColor="@android:color/white"
+        android:fontFamily="sans-serif-light"
+        android:layout_marginTop="25dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="16dp"
+        android:gravity="center"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <RelativeLayout
+        android:id="@+id/bottomPanel"
+        android:layout_width="match_parent"
+        android:layout_alignParentBottom="true"
+        android:background="#388E3C"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:tint="@android:color/white"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_next"
+            android:padding="12dp"/>
+
+        <Button
+            android:id="@+id/next"
+            android:layout_width="match_parent"
+            android:background="?android:selectableItemBackground"
+            android:layout_height="56dp"
+            android:textColor="@android:color/white"
+            android:text="Next step"/>
+
+    </RelativeLayout>
+
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/textView6"
+        android:layout_above="@id/bottomPanel"
+        android:layout_margin="16dp"
+        android:src="@drawable/info_widgets"/>
+</RelativeLayout>

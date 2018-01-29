@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.dravite.newlayouttest.views.SearchResultLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                                                    android:orientation="vertical" android:layout_width="match_parent"
+                                                    android:layout_height="match_parent"
+                                                    android:background="@android:color/white"
+                                                    android:visibility="gone"
+                                                    android:clickable="true"
+                                                    android:id="@+id/searchResultLayout">
+
+    <android.support.v7.widget.RecyclerView
+        android:clickable="true"
+        android:id="@+id/searchResultList"
+        android:paddingTop="88dp"
+        android:paddingEnd="16dp"
+        android:paddingStart="16dp"
+        android:paddingBottom="24dp"
+        android:clipToPadding="false"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </android.support.v7.widget.RecyclerView>
+
+</com.dravite.newlayouttest.views.SearchResultLayout>

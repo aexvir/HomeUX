@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="ToggleImageButton">
+        <attr name="android:checked"/>
+        <attr name="only_check_no_uncheck" format="boolean"/>
+    </declare-styleable>
+
+    <declare-styleable name="IndicatorView">
+        <attr name="dotColor" format="color"/>
+        <attr name="dotCount" format="integer"/>
+    </declare-styleable>
+
+</resources>

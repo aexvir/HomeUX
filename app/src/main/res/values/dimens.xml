@@ -1,0 +1,8 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+
+    <dimen name="handle_diameter">40dp</dimen>
+    <dimen name="handle">40dp</dimen>
+    <dimen name="handle_margin">28dp</dimen>
+    <dimen name="app_icon_text_padding_delta">0dp</dimen>
+</resources>
