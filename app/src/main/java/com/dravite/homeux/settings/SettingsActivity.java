@@ -154,7 +154,6 @@ public class SettingsActivity extends SettingsBaseActivity {
 
                 mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_version), versionName, "", R.drawable.ic_home_ux, Uri.parse(getString(R.string.app_version_url))));
                 mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_version_code), versionCode, "", R.drawable.ic_home_ux, Uri.parse(getString(R.string.app_version_code_url))));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.donate), mContext.getString(R.string.donate_desc), "", R.drawable.ic_attach_money_black_24dp, Uri.parse(getString(R.string.donate_link))));
                 mItems.add(new GenericSettingsItem(mContext.getString(R.string.about_dravite), mContext.getString(R.string.about_dravite_desc), "", R.drawable.ic_info_black_24dp, Uri.parse(getString(R.string.about_dravite_url))));
             }
         });
