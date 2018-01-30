@@ -87,22 +87,11 @@ public class SettingsItemAdapter extends RecyclerView.Adapter<BaseItem.ItemViewH
         }
 
         //Enable or disable the item.
-        holder.setEnabled(!cItem.isPremium() && cItem.getAction()!=null && cItem.isEnabled());
+        holder.setEnabled(cItem.getAction()!=null && cItem.isEnabled());
 
         //Set the click action when enabled and the action is not null.
         if(cItem.getAction()!=null && holder.isEnabled()) {
             holder.setOnItemClickListener(cItem.getAction(), cItem, this);
-        }
-
-        //Clear the premium overlay and...
-        holder.itemView.getOverlay().clear();
-        //re-add it only when the assigned item is a premium option AND the app itself is in a non-premium state.
-        if(cItem.isPremium()) {
-            Drawable premiumOverlay = mFragment.getContext().getDrawable(R.drawable.pro_badge);
-            if(premiumOverlay!=null) {
-                premiumOverlay.setBounds(0, LauncherUtils.dpToPx(8, mFragment.getContext()), LauncherUtils.dpToPx(56, mFragment.getContext()), LauncherUtils.dpToPx(64, mFragment.getContext()));
-                holder.itemView.getOverlay().add(premiumOverlay);
-            }
         }
     }
 

@@ -55,12 +55,11 @@ public class SwitchSettingsItem extends BaseItem<SwitchSettingsItem.SwitchItemHo
      * @param description The item description
      * @param tag The preference tag
      * @param drawableRes The icon resource ID
-     * @param premium Is this item premium-only?
      * @param enabled Is this switch item enabled?
      * @param isCheckedByDefault Is this switch checked by default?
      */
-    public SwitchSettingsItem(String title, String description, String tag, int drawableRes, boolean premium, boolean enabled, boolean isCheckedByDefault){
-        this(title, description, tag, drawableRes, premium, enabled);
+    public SwitchSettingsItem(String title, String description, String tag, int drawableRes, boolean enabled, boolean isCheckedByDefault){
+        this(title, description, tag, drawableRes, enabled);
         mIsChecked = isCheckedByDefault;
     }
 
@@ -70,11 +69,10 @@ public class SwitchSettingsItem extends BaseItem<SwitchSettingsItem.SwitchItemHo
      * @param description The item description
      * @param tag The preference tag
      * @param drawableRes The icon resource ID
-     * @param premium Is this item premium-only?
      * @param enabled Is this switch item enabled?
      */
-    public SwitchSettingsItem(String title, String description, String tag, int drawableRes, boolean premium, boolean enabled){
-        this(title, description, tag, drawableRes, premium);
+    public SwitchSettingsItem(String title, String description, String tag, int drawableRes, boolean enabled){
+        this(title, description, tag, drawableRes);
         setEnabled(enabled);
     }
 
@@ -84,10 +82,9 @@ public class SwitchSettingsItem extends BaseItem<SwitchSettingsItem.SwitchItemHo
      * @param description The item description
      * @param tag The preference tag
      * @param drawableRes The icon resource ID
-     * @param premium Is this item premium-only?
      */
-    public SwitchSettingsItem(String title, String description, String tag, int drawableRes, boolean premium){
-        super(TYPE_SWITCH, premium, tag);
+    public SwitchSettingsItem(String title, String description, String tag, int drawableRes){
+        super(TYPE_SWITCH, tag);
         mTitle = title;
         mDescription = description;
         mDrawableRes = drawableRes;

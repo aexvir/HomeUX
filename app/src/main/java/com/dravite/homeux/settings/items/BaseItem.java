@@ -34,9 +34,6 @@ public abstract class BaseItem<T extends BaseItem.ItemViewHolder> {
     //Listener of what should happen when you click this item
     private ItemViewHolder.OnItemClickListener mListener;
 
-    //Is this item a premium option? If so show a badge and disable it when not using the premium key
-    private boolean mPremium;
-
     private String mTag;
 
     //Is this item enabled aka clickable?
@@ -145,12 +142,10 @@ public abstract class BaseItem<T extends BaseItem.ItemViewHolder> {
     /**
      * Initialize the BaseItem rudimentarily.
      * @param type The item type {@link BaseItem#mType}
-     * @param premium Is this item a premium-only option?
      * @param tag a Tag used to save the value to the SharedPreferences
      */
-    public BaseItem(int type, boolean premium, String tag){
+    public BaseItem(int type, String tag){
         mType = type;
-        mPremium = premium;
         mTag = tag;
     }
 
@@ -162,10 +157,6 @@ public abstract class BaseItem<T extends BaseItem.ItemViewHolder> {
 
     public String getTag() {
         return mTag;
-    }
-
-    public boolean isPremium(){
-        return mPremium;
     }
 
     public void setEnabled(boolean enabled) {
