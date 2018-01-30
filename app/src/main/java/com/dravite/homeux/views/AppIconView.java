@@ -4,9 +4,12 @@ import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.Button;
@@ -100,17 +103,13 @@ public class AppIconView extends Button {
     protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
 
-        //Drawable height is equal to the icon height, independent of whether there is an icon or not
-        int drawableHeight = mIconSizePixels;
-        int drawablePadding = getCompoundDrawablePadding();
         getPaint().getTextBounds(getText().toString(), 0, getText().length(), mTextBounds);
 
-        //Calculate text height
-        int textHeight = mLabelVisibility?(drawablePadding+mTextBounds.height()):0;
-        int additionalPadding = mLabelVisibility?LauncherUtils.dpToPx(4, getContext()):0;
-        float padding = (drawableHeight + textHeight - getMeasuredHeight()) / 4 -additionalPadding;
+        int iconPadding = (getMeasuredHeight() / 2) - (mIconSizePixels / 2);
+        int additionalPadding = mLabelVisibility ? LauncherUtils.dpToPx(4, getContext()):0;
+        int textPadding = mLabelVisibility ? mTextBounds.height() : 0;
 
-        setPadding(0, ((int) (-padding - (getResources().getDimension(R.dimen.app_icon_text_padding_delta)))), 0, 0);
+        setPadding(0, iconPadding - textPadding + additionalPadding, 0, 0);
     }
 
     @Override
@@ -157,8 +156,14 @@ public class AppIconView extends Button {
      * @param icon The new icon drawable
      */
     public void setIcon(Drawable icon) {
+        int iconSize = mDoOverrideData ? mIconSizePixels : LauncherUtils.dpToPx(Const.ICON_SIZE, getContext());
         if(icon!=null){
-            icon.setBounds(0, 0, mDoOverrideData? mIconSizePixels :LauncherUtils.dpToPx(Const.ICON_SIZE, getContext()), mDoOverrideData? mIconSizePixels :LauncherUtils.dpToPx(Const.ICON_SIZE, getContext()));
+            icon.setBounds(
+                0,
+                0,
+                iconSize,
+                iconSize
+            );
         }
         setCompoundDrawables(null, icon, null, null);
     }
@@ -175,7 +180,7 @@ public class AppIconView extends Button {
 
     @Override
     public void setTextColor(int color) {
-        if(mDoOverrideData||mLabelVisibility)
+        if(mDoOverrideData || mLabelVisibility)
             super.setTextColor(color);
         else
             super.setTextColor(Color.TRANSPARENT);
