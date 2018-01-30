@@ -86,15 +86,6 @@ public class SettingsActivity extends SettingsBaseActivity {
     }
 
     /**
-     * Checks for premium access.
-     * @param defaultVal The default boolean value
-     * @return false if the app is not licensed, the value of defaultVal otherwise.
-     */
-    boolean isPremium(boolean defaultVal){
-        return !(preferences.getBoolean("isLicensed", false)) && defaultVal;
-    }
-
-    /**
      * Initializes the "Apps" tab page by adding some settings items.
      */
     void initAppPage(){
@@ -105,16 +96,15 @@ public class SettingsActivity extends SettingsBaseActivity {
                 int gridWidth = preferences.getInt(Defaults.TAG_APP_WIDTH, getResources().getInteger(R.integer.app_grid_width));
                 int gridHeight = preferences.getInt(Defaults.TAG_APP_HEIGHT, getResources().getInteger(R.integer.app_grid_height));
 
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.menu_action_hidden_apps), null, "", R.drawable.ic_hide, isPremium(false), new Intent(SettingsActivity.this, HiddenAppsActivity.class)));
-                mItems.add(new GenericSettingsItem(getString(R.string.app_grid_size), gridWidth + " wide, " + gridHeight + " high", "grid_size", R.drawable.ic_grid_on_black_24dp, isPremium(false), mGridSizeListener));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_icon_size), (32+8*preferences.getInt(Defaults.TAG_ICON_SIZE, Defaults.getInt(Defaults.TAG_ICON_SIZE))) + "dp", "iconSize5", R.drawable.ic_icon_size, isPremium(true), mIconSizeListener));
-                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.app_labels), null, Defaults.TAG_SHOW_LABELS, R.drawable.ic_show_labels, isPremium(false), true, Defaults.getBoolean(Defaults.TAG_SHOW_LABELS)));
-                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.enable_notification_badges), "Show the notification count on the icons", Defaults.TAG_NOTIFICATIONS, R.drawable.ic_notifications_black_24dp, isPremium(true), true, Defaults.getBoolean(Defaults.TAG_NOTIFICATIONS)));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.menu_action_hidden_apps), null, "", R.drawable.ic_hide, new Intent(SettingsActivity.this, HiddenAppsActivity.class)));
+                mItems.add(new GenericSettingsItem(getString(R.string.app_grid_size), gridWidth + " wide, " + gridHeight + " high", "grid_size", R.drawable.ic_grid_on_black_24dp, mGridSizeListener));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_icon_size), (32+8*preferences.getInt(Defaults.TAG_ICON_SIZE, Defaults.getInt(Defaults.TAG_ICON_SIZE))) + "dp", "iconSize5", R.drawable.ic_icon_size, mIconSizeListener));
+                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.app_labels), null, Defaults.TAG_SHOW_LABELS, R.drawable.ic_show_labels, true, Defaults.getBoolean(Defaults.TAG_SHOW_LABELS)));
+                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.enable_notification_badges), "Show the notification count on the icons", Defaults.TAG_NOTIFICATIONS, R.drawable.ic_notifications_black_24dp, true, Defaults.getBoolean(Defaults.TAG_NOTIFICATIONS)));
                 mItems.add(new SwitchSettingsItem(mContext.getString(R.string.hide_apps_from_all), null, Defaults.TAG_HIDE_ALL, R.drawable.ic_settings_applications_black_24dp, false));
                 mItems.add(new CaptionSettingsItem(getString(R.string.category_pages)));
-                //mItems.add(new SwitchSettingsItem(mContext.getString(R.string.hide_cards), null, Defaults.TAG_HIDE_CARDS, R.drawable.ic_hide_cards, isPremium(false), true, Defaults.getBoolean(Defaults.TAG_HIDE_CARDS)));
-                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.dis_wallpaper_scroll), null, Defaults.TAG_DISABLE_WALLPAPER_SCROLL, R.drawable.ic_wallpaper_black_24dp, isPremium(false), true, Defaults.getBoolean(Defaults.TAG_DISABLE_WALLPAPER_SCROLL)));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_page_transition), getResources().getStringArray(R.array.page_transformer_names)[preferences.getInt(Defaults.TAG_TRANSFORMER_INT, Defaults.getInt(Defaults.TAG_TRANSFORMER_INT))], "transformer", R.drawable.ic_page_transitions, isPremium(true), mPageTransitionListener));
+                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.dis_wallpaper_scroll), null, Defaults.TAG_DISABLE_WALLPAPER_SCROLL, R.drawable.ic_wallpaper_black_24dp, true, Defaults.getBoolean(Defaults.TAG_DISABLE_WALLPAPER_SCROLL)));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_page_transition), getResources().getStringArray(R.array.page_transformer_names)[preferences.getInt(Defaults.TAG_TRANSFORMER_INT, Defaults.getInt(Defaults.TAG_TRANSFORMER_INT))], "transformer", R.drawable.ic_page_transitions, mPageTransitionListener));
             }
         });
     }
@@ -127,15 +117,15 @@ public class SettingsActivity extends SettingsBaseActivity {
         putPage(getString(R.string.page_action_panel), new AddItems() {
             @Override
             public void create(List<BaseItem> mItems) {
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.category_clock_widget), null, "", R.drawable.ic_clock, isPremium(false), new Intent(SettingsActivity.this, ActivityClockSettings.class)));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.action_panel_transparency), (int)(preferences.getFloat(Defaults.TAG_PANEL_TRANS, Defaults.getFloat(Defaults.TAG_PANEL_TRANS))*100) + "%", Defaults.TAG_PANEL_TRANS, R.drawable.ic_transparency, isPremium(false), mOpacityListener));
-                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.transparent_status), null, Defaults.TAG_TRANSP_STATUS, R.drawable.ic_space_bar_black_24dp, isPremium(false), true, Defaults.getBoolean(Defaults.TAG_TRANSP_STATUS)));
-                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.direct_reveal), mContext.getString(R.string.direct_reveal_desc), Defaults.TAG_DIRECT_REVEAL, R.drawable.ic_swap_vertical_circle_black_24dp, isPremium(false), true, Defaults.getBoolean(Defaults.TAG_DIRECT_REVEAL)));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.default_home), preferences.getString(Defaults.TAG_DEFAULT_FOLDER, Defaults.getString(Defaults.TAG_DEFAULT_FOLDER)), Defaults.TAG_DEFAULT_FOLDER, R.drawable.ic_home_black_24dp, isPremium(false), mDefaultHomeListener));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.category_clock_widget), null, "", R.drawable.ic_clock, new Intent(SettingsActivity.this, ActivityClockSettings.class)));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.action_panel_transparency), (int)(preferences.getFloat(Defaults.TAG_PANEL_TRANS, Defaults.getFloat(Defaults.TAG_PANEL_TRANS))*100) + "%", Defaults.TAG_PANEL_TRANS, R.drawable.ic_transparency, mOpacityListener));
+                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.transparent_status), null, Defaults.TAG_TRANSP_STATUS, R.drawable.ic_space_bar_black_24dp, true, Defaults.getBoolean(Defaults.TAG_TRANSP_STATUS)));
+                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.direct_reveal), mContext.getString(R.string.direct_reveal_desc), Defaults.TAG_DIRECT_REVEAL, R.drawable.ic_swap_vertical_circle_black_24dp, true, Defaults.getBoolean(Defaults.TAG_DIRECT_REVEAL)));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.default_home), preferences.getString(Defaults.TAG_DEFAULT_FOLDER, Defaults.getString(Defaults.TAG_DEFAULT_FOLDER)), Defaults.TAG_DEFAULT_FOLDER, R.drawable.ic_home_black_24dp, mDefaultHomeListener));
                 mItems.add(new CaptionSettingsItem(getString(R.string.category_quick_actions)));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.quick_app_floating), preferences.getString(Defaults.TAG_QA_FAB, Defaults.getString(Defaults.TAG_QA_FAB)), Defaults.TAG_QA_FAB, R.drawable.ic_play_circle_filled_black_24dp, isPremium(false), mQuickAppListener));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.quick_app_floating_icon), null, "", getDrawableFromPreference(Defaults.TAG_QA_ICON, Defaults.getString(Defaults.TAG_QA_ICON)), isPremium(false), new Intent(SettingsActivity.this, SelectFolderIconActivity.class), REQUEST_PICK_QA_ICON));
-                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.switch_config), mContext.getString(R.string.switch_config_desc), Defaults.TAG_SWITCH_CONFIG, R.drawable.ic_swap_horiz_black_24dp, isPremium(false), true, Defaults.getBoolean(Defaults.TAG_SWITCH_CONFIG)));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.quick_app_floating), preferences.getString(Defaults.TAG_QA_FAB, Defaults.getString(Defaults.TAG_QA_FAB)), Defaults.TAG_QA_FAB, R.drawable.ic_play_circle_filled_black_24dp, mQuickAppListener));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.quick_app_floating_icon), null, "", getDrawableFromPreference(Defaults.TAG_QA_ICON, Defaults.getString(Defaults.TAG_QA_ICON)), new Intent(SettingsActivity.this, SelectFolderIconActivity.class), REQUEST_PICK_QA_ICON));
+                mItems.add(new SwitchSettingsItem(mContext.getString(R.string.switch_config), mContext.getString(R.string.switch_config_desc), Defaults.TAG_SWITCH_CONFIG, R.drawable.ic_swap_horiz_black_24dp, true, Defaults.getBoolean(Defaults.TAG_SWITCH_CONFIG)));
             }
         });
     }
@@ -148,9 +138,9 @@ public class SettingsActivity extends SettingsBaseActivity {
         putPage(getString(R.string.page_home_ux), new AddItems() {
             @Override
             public void create(List<BaseItem> mItems) {
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.activity_backup_restore), null, "", R.drawable.ic_settings_backup_restore_black_24dp, false, new Intent(SettingsActivity.this, BackupRestoreActivity.class), REQUEST_BACKUP_RESTORE));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.redo_welcome), null, "", R.drawable.ic_info_outline_black_24dp, false, new Intent(SettingsActivity.this, WelcomeActivity.class)));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.reset), mContext.getString(R.string.reset_desc), "", R.drawable.ic_clear_black_24dp, false, mResetClickListener));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.activity_backup_restore), null, "", R.drawable.ic_settings_backup_restore_black_24dp, new Intent(SettingsActivity.this, BackupRestoreActivity.class), REQUEST_BACKUP_RESTORE));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.redo_welcome), null, "", R.drawable.ic_info_outline_black_24dp, new Intent(SettingsActivity.this, WelcomeActivity.class)));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.reset), mContext.getString(R.string.reset_desc), "", R.drawable.ic_clear_black_24dp, mResetClickListener));
                 mItems.add(new CaptionSettingsItem(getString(R.string.category_about)));
 
                 String versionName="0", versionCode="0";
@@ -162,10 +152,10 @@ public class SettingsActivity extends SettingsBaseActivity {
                     e.printStackTrace();
                 }
 
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_version), versionName, "", R.drawable.ic_home_ux, false, Uri.parse(getString(R.string.app_version_url))));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_version_code), versionCode, "", R.drawable.ic_home_ux, false, Uri.parse(getString(R.string.app_version_code_url))));
-                if(isPremium(true)) mItems.add(new GenericSettingsItem(mContext.getString(R.string.donate), mContext.getString(R.string.donate_desc), "", R.drawable.ic_attach_money_black_24dp, false, Uri.parse(getString(R.string.donate_link))));
-                mItems.add(new GenericSettingsItem(mContext.getString(R.string.about_dravite), mContext.getString(R.string.about_dravite_desc), "", R.drawable.ic_info_black_24dp, false, Uri.parse(getString(R.string.about_dravite_url))));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_version), versionName, "", R.drawable.ic_home_ux, Uri.parse(getString(R.string.app_version_url))));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_version_code), versionCode, "", R.drawable.ic_home_ux, Uri.parse(getString(R.string.app_version_code_url))));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.donate), mContext.getString(R.string.donate_desc), "", R.drawable.ic_attach_money_black_24dp, Uri.parse(getString(R.string.donate_link))));
+                mItems.add(new GenericSettingsItem(mContext.getString(R.string.about_dravite), mContext.getString(R.string.about_dravite_desc), "", R.drawable.ic_info_black_24dp, Uri.parse(getString(R.string.about_dravite_url))));
             }
         });
     }

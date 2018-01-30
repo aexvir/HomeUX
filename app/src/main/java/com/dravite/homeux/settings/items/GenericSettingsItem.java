@@ -34,11 +34,10 @@ public class GenericSettingsItem extends BaseItem<GenericSettingsItem.GeneralVie
      * @param description The item description
      * @param tag The preference tag
      * @param drawableRes The icon resource ID
-     * @param premium Is this item premium-only?
      * @param uri The URI to open when clicked
      */
-    public GenericSettingsItem(String title, String description, String tag, int drawableRes, boolean premium, final Uri uri){
-        this(title, description, tag, drawableRes, premium);
+    public GenericSettingsItem(String title, String description, String tag, int drawableRes, final Uri uri){
+        this(title, description, tag, drawableRes);
         setAction(new ItemViewHolder.OnItemClickListener() {
             @Override
             public void onClick(View v, BaseItem item, RecyclerView.Adapter adapter, int position) {
@@ -55,12 +54,11 @@ public class GenericSettingsItem extends BaseItem<GenericSettingsItem.GeneralVie
      * @param description The item description
      * @param tag The preference tag
      * @param drawableRes The icon resource ID
-     * @param premium Is this item premium-only?
      * @param intent The intent to open when clicked
      * @param requestCode The requestCode to return from the opened intent
      */
-    public GenericSettingsItem(String title, String description, String tag, int drawableRes, boolean premium, final Intent intent, final int requestCode){
-        this(title, description, tag, drawableRes, premium);
+    public GenericSettingsItem(String title, String description, String tag, int drawableRes, final Intent intent, final int requestCode){
+        this(title, description, tag, drawableRes);
         setAction(new ItemViewHolder.OnItemClickListener() {
             @Override
             public void onClick(View v, BaseItem item, RecyclerView.Adapter adapter, int position) {
@@ -75,11 +73,10 @@ public class GenericSettingsItem extends BaseItem<GenericSettingsItem.GeneralVie
      * @param description The item description
      * @param tag The preference tag
      * @param drawableRes The icon resource ID
-     * @param premium Is this item premium-only?
      * @param intent The intent to open
      */
-    public GenericSettingsItem(String title, String description, String tag, int drawableRes, boolean premium, final Intent intent){
-        this(title, description, tag, drawableRes, premium);
+    public GenericSettingsItem(String title, String description, String tag, int drawableRes, final Intent intent){
+        this(title, description, tag, drawableRes);
         setAction(new ItemViewHolder.OnItemClickListener() {
             @Override
             public void onClick(View v, BaseItem item, RecyclerView.Adapter adapter, int position) {
@@ -94,11 +91,10 @@ public class GenericSettingsItem extends BaseItem<GenericSettingsItem.GeneralVie
      * @param description The item description
      * @param tag The preference tag
      * @param drawableRes The icon resource ID
-     * @param premium Is this item premium-only?
      * @param listener The listener to run
      */
-    public GenericSettingsItem(String title, String description, String tag, int drawableRes, boolean premium, ItemViewHolder.OnItemClickListener listener){
-        this(title, description, tag, drawableRes, premium);
+    public GenericSettingsItem(String title, String description, String tag, int drawableRes, ItemViewHolder.OnItemClickListener listener){
+        this(title, description, tag, drawableRes);
         setAction(listener);
     }
 
@@ -108,10 +104,9 @@ public class GenericSettingsItem extends BaseItem<GenericSettingsItem.GeneralVie
      * @param description The item description
      * @param tag The preference tag
      * @param drawableRes The icon resource ID
-     * @param premium Is this item premium-only?
      */
-    public GenericSettingsItem(String title, String description, String tag, int drawableRes, boolean premium){
-        super(TYPE_GENERIC, premium, tag);
+    public GenericSettingsItem(String title, String description, String tag, int drawableRes){
+        super(TYPE_GENERIC, tag);
         mTitle = title;
         mDescription = description;
         mDrawableRes = drawableRes;

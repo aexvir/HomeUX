@@ -129,7 +129,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     // CONSTANTS
     public static boolean updateAfterSettings = false;
     public static final int ANIM_DURATION_DEFAULT = 170;      //Default anim time in ms
-    private static final int RESULT_CHECK_PREMIUM = 484;
     public static final int MAX_OFFSCREEN_FOLDERS = 100;      //Max non-visible folders
     public static final int THREAD_COUNT = 16;       //Thread count for the mStaticParallelThreadPool
 
@@ -137,7 +136,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     private static final String TAG = "LauncherActivity"; //Log Tag
 
     //STATIC
-    public static boolean isPremium = false; //Flag for whether the app is premium or not
     public static FolderStructure mFolderStructure;   //Contains all folders
     public static DrawerTree mDrawerTree;        //Contains all apps etc.
     public static ParallelExecutor mStaticParallelThreadPool = new ParallelExecutor(THREAD_COUNT); //Used for parallelized loading for everything
@@ -281,33 +279,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     }
 
     /**
-     * Checks, if the user has premium access
-     *
-     * @param force force reload premium access check.
-     */
-    private void checkPremium(boolean force) {
-        mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        long lastCheck = mPreferences.getLong("lastLicenseCheck", 0);
-        isPremium = mPreferences.getBoolean("isLicensed", false);
-        if (System.currentTimeMillis() - lastCheck >= 86400000 || !isPremium || force) {
-            LauncherLog.d("Licensing", "Checking license...");
-            SharedPreferences.Editor editor = mPreferences.edit();
-            editor.putLong("lastLicenseCheck", System.currentTimeMillis());
-            try {
-                mLicenseIntent.setComponent(new ComponentName("com.home.ux.donate", "com.home.ux.donate.LicensingService"));
-                startService(mLicenseIntent);
-            } catch (ActivityNotFoundException e) {
-                editor.putBoolean("isLicensed", false);
-                isPremium = false;
-                e.printStackTrace();
-            }
-            editor.apply();
-        } else {
-            LauncherLog.d("Licensing", "Loading old License.");
-        }
-    }
-
-    /**
      * Checks for new Notifications.
      */
     public void fetchNotifications() {
@@ -329,21 +300,10 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
 
     @Override
     public void update(Observable observable, Object data) {
-        LauncherLog.d(TAG, "Received update on Licensing");
         if (data != null && data instanceof Intent) {
             Intent intent = (Intent) data;
-            isPremium = intent.getBooleanExtra("isPremium", false);
-
-            if (!mPreferences.getBoolean("hasShownMessage", false) && isPremium && !isFinishing()) {
-                new AlertDialog.Builder(LauncherActivity.this, R.style.DialogTheme)
-                        .setTitle("Licensing successful!")
-                        .setMessage("You successfully activated HomeUX premium. Have fun!")
-                        .setPositiveButton(android.R.string.ok, null).show();
-            }
 
             SharedPreferences.Editor editor = mPreferences.edit();
-            editor.putBoolean(Const.Defaults.TAG_LICENSED, isPremium);
-            editor.putBoolean(Const.Defaults.TAG_HAS_SHOWN_MESSAGE, isPremium);
             editor.apply();
 
             stopService(mLicenseIntent);
@@ -480,8 +440,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
         registerReceivers();
         fetchNotifications();
 
-        //Premium and first start
-        checkPremium(true);
         checkFirstStart();
 
 
@@ -1388,13 +1346,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     }
 
     @Override
-    protected void onStart() {
-        //Casually check for premium access.
-        checkPremium(false);
-        super.onStart();
-    }
-
-    @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         //Delete savedInstanceState. TODO: Still don't know why I did that.
         savedInstanceState.clear();
@@ -1417,9 +1368,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
 
         //Re-Assign SharedPreferences just in case and refresh several settings
         mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
-        isPremium = mPreferences.getBoolean(Const.Defaults.TAG_LICENSED, Const.Defaults.getBoolean(Const.Defaults.TAG_LICENSED));
-        if (!isPremium)
-            checkPremium(true);
+
         final SharedPreferences mPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         Const.ICON_SIZE = 32 + (mPreferences.getInt(Const.Defaults.TAG_ICON_SIZE, Const.Defaults.getInt(Const.Defaults.TAG_ICON_SIZE)) * 8);
 
@@ -1708,27 +1657,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     }
 
     /**
-     * Returned after checking for a pro license.
-     *
-     * @param data
-     */
-    private void onPremiumRequest(Intent data) {
-        isPremium = data != null && data.getBooleanExtra(Const.Defaults.TAG_LICENSED, Const.Defaults.getBoolean(Const.Defaults.TAG_LICENSED));
-
-        if (!mPreferences.getBoolean(Const.Defaults.TAG_HAS_SHOWN_MESSAGE, Const.Defaults.getBoolean(Const.Defaults.TAG_HAS_SHOWN_MESSAGE)) && isPremium) {
-            new AlertDialog.Builder(this, R.style.DialogTheme)
-                    .setTitle("Licensing successful!")
-                    .setMessage("You successfully activated HomeUX premium. Have fun!")
-                    .setPositiveButton(android.R.string.ok, null).show();
-        }
-
-        SharedPreferences.Editor editor = mPreferences.edit();
-        editor.putBoolean(Const.Defaults.TAG_LICENSED, isPremium);
-        editor.putBoolean(Const.Defaults.TAG_HAS_SHOWN_MESSAGE, isPremium);
-        editor.apply();
-    }
-
-    /**
      * Called after returning from settings.<br/>
      * Here, everything is updated
      */
@@ -1776,9 +1704,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
                 break;
             case FolderEditorActivity.REQUEST_EDIT_FOLDER:
                 onEditFolderRequest(data);
-                break;
-            case RESULT_CHECK_PREMIUM:
-                onPremiumRequest(data);
                 break;
             case SettingsActivity.REQUEST_SETTINGS:
                 onSettingsRequest();
@@ -1988,8 +1913,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
         FileManager.deleteRecursive(new File(getCacheDir().getPath() + "/apps/" + packageName));
 
         mDrawerTree.remove(packageName);
-        if (packageName.equals("com.home.ux.donate")) //Uninstalled the premium app (Why should anyone do that???)
-            checkPremium(true);
 
         File dir = new File(getCacheDir().getPath() + FileManager.PATH_APP_CACHE + packageName);
         FileManager.deleteRecursive(dir);
@@ -2017,8 +1940,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
      * @param packageName the package containing the new app(s)
      */
     public void onAppAdded(final String packageName) {
-        if (packageName.equals("com.home.ux.donate"))
-            checkPremium(false);
         try {
             mCurrentIconPack.loadSelectedPackage(null, packageName);
         } catch (Exception e) {
@@ -2071,8 +1992,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     public void onAppChanged(String packageName) {
         LauncherLog.d(TAG, "App changed: " + packageName);
 
-        if (packageName.equals("com.home.ux.donate"))
-            checkPremium(false);
         try {
             mCurrentIconPack.loadSelectedPackage(null, packageName);
         } catch (Exception e) {

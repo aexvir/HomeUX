@@ -24,7 +24,7 @@ public class CaptionSettingsItem extends BaseItem<CaptionSettingsItem.CaptionIte
     }
 
     public CaptionSettingsItem(String title){
-        super(TYPE_CAPTION, false, "");
+        super(TYPE_CAPTION, "");
         mTitle = title;
     }
 
