@@ -637,10 +637,7 @@ public class CustomGridLayout extends GridLayout implements View.OnLongClickList
      * @return An AppIconView for an Application to be assigned to.
      */
     public AppIconView inflateIcon(){
-//        for(AppIconView aiv : applicationViews)
-//            if(aiv.getParent() == null)
-//                return aiv;
-        return (AppIconView)mInflater.inflate(R.layout.icon, this, false);
+        return (AppIconView) mInflater.inflate(R.layout.icon, this, false);
     }
 
 
