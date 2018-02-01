@@ -9,12 +9,14 @@
     <EditText
         android:id="@+id/hexValue"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="48dp"
         android:layout_alignParentBottom="true"
         android:layout_alignStart="@+id/value"
         android:hint="Hex value"
         android:layout_toStartOf="@+id/submitButton"
         android:imeOptions="actionDone"
+        android:background="@android:color/transparent"
+        android:layout_marginLeft="8dp"
         android:singleLine="true" />
 
     <SeekBar
@@ -26,7 +28,8 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="-8dp"
+        android:thumbTint="@color/colorPrimary"
+        android:progressTint="@color/colorPrimary"
         android:max="1000" />
 
     <TextView
@@ -48,7 +51,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="-8dp"
+        android:thumbTint="@color/colorPrimary"
+        android:progressTint="@color/colorPrimary"
         android:max="1000" />
 
     <TextView
@@ -70,7 +74,8 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginTop="-8dp"
+        android:thumbTint="@color/colorPrimary"
+        android:progressTint="@color/colorPrimary"
         android:max="360" />
 
     <TextView
