@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:theme="@android:style/Theme.Material.Light" >
+
+    <TextView
+        android:id="@+id/cornerRadiusLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_marginTop="16dp"
+        android:text="@string/notification_badge_corner_radius" />
+
+    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+        android:id="@+id/cornerRadius"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_below="@id/cornerRadiusLabel"
+        app:dsb_indicatorColor="@color/colorPrimary"
+        app:dsb_max="@integer/max_notification_badge_radius"
+        app:dsb_progressColor="@color/colorPrimary" />
+
+</RelativeLayout>

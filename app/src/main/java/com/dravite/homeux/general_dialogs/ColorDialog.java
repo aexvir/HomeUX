@@ -28,6 +28,8 @@ import com.dravite.homeux.general_dialogs.helpers.ColorWatcher;
 import com.dravite.homeux.general_helpers.ColorUtils;
 import com.dravite.homeux.R;
 
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
+
 /**
  * A Dialog that shows a color selector with HSL color format sliders.
  */
@@ -78,9 +80,9 @@ public class ColorDialog {
         ((ViewGroup) mContent.findViewById(R.id.content)).addView(colorChooser);
 
         //Init Seekbars
-        final SeekBar hue = (SeekBar) colorChooser.findViewById(R.id.hue);
-        final SeekBar saturation = (SeekBar) colorChooser.findViewById(R.id.saturation);
-        final SeekBar value = (SeekBar) colorChooser.findViewById(R.id.value);
+        final DiscreteSeekBar hue = (DiscreteSeekBar) colorChooser.findViewById(R.id.hue);
+        final DiscreteSeekBar saturation = (DiscreteSeekBar) colorChooser.findViewById(R.id.saturation);
+        final DiscreteSeekBar value = (DiscreteSeekBar) colorChooser.findViewById(R.id.value);
 
 
         float[] hsl = ColorUtils.colorToHSL(mColor);
@@ -90,9 +92,9 @@ public class ColorDialog {
 
         updateColor(colorChooser, mColor);
 
-        SeekBar.OnSeekBarChangeListener listener = new SeekBar.OnSeekBarChangeListener() {
+        DiscreteSeekBar.OnProgressChangeListener listener = new DiscreteSeekBar.OnProgressChangeListener() {
             @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+            public void onProgressChanged(DiscreteSeekBar seekBar, int progress, boolean fromUser) {
                 if(fromUser) {
                     float[] hsl = new float[3];
 
@@ -107,19 +109,19 @@ public class ColorDialog {
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
+            public void onStartTrackingTouch(DiscreteSeekBar seekBar) {
 
             }
 
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
+            public void onStopTrackingTouch(DiscreteSeekBar seekBar) {
 
             }
         };
 
-        hue.setOnSeekBarChangeListener(listener);
-        saturation.setOnSeekBarChangeListener(listener);
-        value.setOnSeekBarChangeListener(listener);
+        hue.setOnProgressChangeListener(listener);
+        saturation.setOnProgressChangeListener(listener);
+        value.setOnProgressChangeListener(listener);
 
         final EditText hexValue = (EditText) colorChooser.findViewById(R.id.hexValue);
         final ImageButton button = (ImageButton) colorChooser.findViewById(R.id.submitButton);
@@ -240,23 +242,33 @@ public class ColorDialog {
         View colorView = root.findViewById(R.id.colorView);
         EditText hexValue = (EditText) root.findViewById(R.id.hexValue);
         mColor = color;
+        int mElementsTint = ColorUtils.getDarkerColor(color);
 
-                mDialog.findViewById(R.id.folder_darker_panel).setBackgroundColor(ColorUtils.getDarkerColor(color));
+        mDialog.findViewById(R.id.folder_darker_panel).setBackgroundColor(mElementsTint);
 
-                ((TextView) mDialog.findViewById(R.id.buttonOk)).setTextColor(ColorUtils.getDarkerColor(color));
-        ((TextView) mDialog.findViewById(R.id.buttonCancel)).setTextColor(ColorUtils.getDarkerColor(color));
+        // TODO: For god's sake improve this mess
 
-//                Switch alphabeticalSwitch = ((Switch) mDialog.findViewById(R.id.alphabeticalSwitch));
-                ((ImageButton)mDialog.findViewById(R.id.submitButton)).setImageTintList(ColorStateList.valueOf(ColorUtils.getDarkerColor(color)));
+        ((TextView) mDialog.findViewById(R.id.buttonOk)).setTextColor(mElementsTint);
+        ((TextView) mDialog.findViewById(R.id.buttonCancel)).setTextColor(mElementsTint);
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.hue)).setScrubberColor(mElementsTint);
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.saturation)).setScrubberColor(mElementsTint);
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.value)).setScrubberColor(mElementsTint);
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.hue)).setThumbColor(mElementsTint, mElementsTint);
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.saturation)).setThumbColor(mElementsTint, mElementsTint);
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.value)).setThumbColor(mElementsTint, mElementsTint);
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.hue)).invalidate();
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.saturation)).invalidate();
+        ((DiscreteSeekBar) mDialog.findViewById(R.id.value)).invalidate();
 
+        ((ImageButton)mDialog.findViewById(R.id.submitButton)).setImageTintList(ColorStateList.valueOf(mElementsTint));
 
-                if (ColorUtils.isBrightColor(color)) {
-                    ((TextView) mDialog.findViewById(R.id.folderName)).setTextColor(0x8a000000);
-                    ((Button)mDialog.findViewById(R.id.switchTo)).setTextColor(0x8a000000);
-                } else {
-                    ((TextView) mDialog.findViewById(R.id.folderName)).setTextColor(Color.WHITE);
-                    ((Button)mDialog.findViewById(R.id.switchTo)).setTextColor(Color.WHITE);
-                }
+        if (ColorUtils.isBrightColor(color)) {
+            ((TextView) mDialog.findViewById(R.id.folderName)).setTextColor(0x8a000000);
+            ((Button)mDialog.findViewById(R.id.switchTo)).setTextColor(0x8a000000);
+        } else {
+            ((TextView) mDialog.findViewById(R.id.folderName)).setTextColor(Color.WHITE);
+            ((Button)mDialog.findViewById(R.id.switchTo)).setTextColor(Color.WHITE);
+        }
 
         hexValue.setText(String.format("#%02X%02X%02X", Color.red(color), Color.green(color), Color.blue(color)));
         colorView.setBackgroundColor(color);

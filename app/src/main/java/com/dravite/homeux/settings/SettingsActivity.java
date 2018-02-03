@@ -15,6 +15,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -38,9 +39,12 @@ import com.dravite.homeux.settings.items.GenericSettingsItem;
 import com.dravite.homeux.settings.items.SwitchSettingsItem;
 import com.dravite.homeux.settings.settings_fragments.SettingsFragmentAdapter;
 
+import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
+
 import java.io.File;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -101,6 +105,7 @@ public class SettingsActivity extends SettingsBaseActivity {
                 mItems.add(new GenericSettingsItem(mContext.getString(R.string.app_icon_size), (32+8*preferences.getInt(Defaults.TAG_ICON_SIZE, Defaults.getInt(Defaults.TAG_ICON_SIZE))) + "dp", "iconSize5", R.drawable.ic_icon_size, mIconSizeListener));
                 mItems.add(new SwitchSettingsItem(mContext.getString(R.string.app_labels), null, Defaults.TAG_SHOW_LABELS, R.drawable.ic_show_labels, true, Defaults.getBoolean(Defaults.TAG_SHOW_LABELS)));
                 mItems.add(new SwitchSettingsItem(mContext.getString(R.string.enable_notification_badges), "Show the notification count on the icons", Defaults.TAG_NOTIFICATIONS, R.drawable.ic_notifications_black_24dp, true, Defaults.getBoolean(Defaults.TAG_NOTIFICATIONS)));
+                mItems.add(new GenericSettingsItem(getString(R.string.notification_badge_corner_radius), gridWidth + " wide, " + gridHeight + " high", "grid_size", R.drawable.ic_grid_on_black_24dp, mNotificationBadgeCustomizer));
                 mItems.add(new SwitchSettingsItem(mContext.getString(R.string.hide_apps_from_all), null, Defaults.TAG_HIDE_ALL, R.drawable.ic_settings_applications_black_24dp, true));
                 mItems.add(new CaptionSettingsItem(getString(R.string.category_pages)));
                 mItems.add(new SwitchSettingsItem(mContext.getString(R.string.dis_wallpaper_scroll), null, Defaults.TAG_DISABLE_WALLPAPER_SCROLL, R.drawable.ic_wallpaper_black_24dp, true, Defaults.getBoolean(Defaults.TAG_DISABLE_WALLPAPER_SCROLL)));
@@ -545,18 +550,62 @@ public class SettingsActivity extends SettingsBaseActivity {
         }
     };
 
+    // Notification badge customization listener
+    BaseItem.ItemViewHolder.OnItemClickListener mNotificationBadgeCustomizer = new BaseItem.ItemViewHolder.OnItemClickListener() {
+        @Override
+        public void onClick(View v, BaseItem item, RecyclerView.Adapter adapter, int position) {
+            final HashMap<String, Integer> notificationBadgeSettings = new HashMap<>();
+
+            Dialog dialog = new AlertDialog.Builder(SettingsActivity.this, R.style.DialogTheme)
+                    .setTitle(R.string.app_notification_badge_design)
+                    .setView(R.layout.notification_badge_dialog)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            SharedPreferences.Editor editor = preferences.edit();
+                            editor.putInt(Defaults.TAG_NOTIFICATIONS_RADIUS, notificationBadgeSettings.get("radius"));
+
+                            editor.apply();
+                        }
+                    })
+                    .setNegativeButton(android.R.string.cancel, null)
+                    .show();
+
+            int cornerRadiusValue = preferences.getInt(Defaults.TAG_NOTIFICATIONS_RADIUS, getResources().getInteger(R.integer.notification_badge_radius));
+            notificationBadgeSettings.put("radius", cornerRadiusValue);
+
+            DiscreteSeekBar cornerRadius = dialog.findViewById(R.id.cornerRadius);
+            cornerRadius.setProgress(cornerRadiusValue);
+
+            cornerRadius.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
+                @Override
+                public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
+                    notificationBadgeSettings.put("radius", value);
+                }
+
+                @Override
+                public void onStartTrackingTouch(DiscreteSeekBar seekBar) {}
+
+                @Override
+                public void onStopTrackingTouch(DiscreteSeekBar seekBar) {}
+            });
+        }
+    };
+
     //The app drawer grid size listener
     BaseItem.ItemViewHolder.OnItemClickListener mGridSizeListener = new BaseItem.ItemViewHolder.OnItemClickListener() {
         @Override
         public void onClick(View v, final BaseItem item, final RecyclerView.Adapter adapter, final int position) {
-
             final int[] savedData = new int[2];
 
-            Dialog dialog = new AlertDialog.Builder(SettingsActivity.this, R.style.DialogTheme).setTitle(R.string.app_grid_size)
-                    .setView(R.layout.grid_size_dialog).setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
+            Dialog dialog = new AlertDialog.Builder(SettingsActivity.this, R.style.DialogTheme)
+                    .setTitle(R.string.app_grid_size)
+                    .setView(R.layout.grid_size_dialog)
+                    .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
                             SharedPreferences.Editor editor = preferences.edit();
+
                             editor.putInt(Defaults.TAG_APP_WIDTH, savedData[0]);
                             editor.putInt(Defaults.TAG_APP_HEIGHT, savedData[1]);
                             editor.apply();
@@ -564,7 +613,8 @@ public class SettingsActivity extends SettingsBaseActivity {
                             ((GenericSettingsItem)item).setDescription(savedData[0] + " wide, " + savedData[1] + " high");
                             adapter.notifyItemChanged(position);
                         }
-                    }).setNegativeButton(android.R.string.cancel, null).show();
+                    }).setNegativeButton(android.R.string.cancel, null)
+                    .show();
 
             final SeekBar seekWidth = (SeekBar)dialog.findViewById(R.id.seek_width);
             final SeekBar seekHeight = (SeekBar)dialog.findViewById(R.id.seek_height);

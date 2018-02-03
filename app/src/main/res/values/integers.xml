@@ -9,4 +9,9 @@
 
     <integer name="min_app_grid_width">3</integer>
     <integer name="app_grid_width_steps">20</integer>
+
+    <integer name="notification_badge_radius">100</integer>
+    <integer name="notification_badge_padding">8</integer>
+    <integer name="min_notification_badge_radius">0</integer>
+    <integer name="max_notification_badge_radius">100</integer>
 </resources>
