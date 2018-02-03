@@ -142,7 +142,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
 
     //NORMAL
     public ArrayList<String> mStatusBarNotifications = new ArrayList<>(); //A list that should contain all notifications
-    public int[] mStatusBarNotificationCounts = new int[0]; //An array of integers containing the count of all app notifications.
     public int mCurrentAccent; //The current accent color.
     public AppWidgetContainer mAppWidgetContainer; //Contains i.e. an AppWidgetHost and some functionality
     public ViewGroup mAppBarLayout;      //The top panel
@@ -248,7 +247,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
                 refreshNotificationIcons();
                 return;
             }
-            mStatusBarNotificationCounts = intent.getIntArrayExtra("numbers");
             Collections.addAll(mStatusBarNotifications, notifications);
             refreshNotificationIcons();
         }
@@ -1459,13 +1457,10 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
                     //iterate through elements
                     if (cFragment.mAppGrid.getChildAt(child) instanceof AppIconView) {
                         CustomGridLayout.GridLayoutParams params = ((CustomGridLayout.GridLayoutParams) cFragment.mAppGrid.getChildAt(child).getLayoutParams());
-                        if (params.viewData instanceof Application && mStatusBarNotifications.contains(((Application) params.viewData).info.getComponentName().getPackageName())) {
-                            int cnt = mStatusBarNotificationCounts[mStatusBarNotifications.indexOf(
-                                    ((Application) params.viewData).info.getComponentName().getPackageName())];
-                            if (cnt == 0)
-                                cnt++; //Count is somehow one less than needed.
-                            ((AppIconView) cFragment.mAppGrid.getChildAt(child))
-                                    .setCounterOverlay(cnt);
+                        String packageName = ((Application) params.viewData).info.getComponentName().getPackageName();
+                        if (params.viewData instanceof Application && mStatusBarNotifications.contains(packageName)) {
+                            int cnt = Collections.frequency(mStatusBarNotifications, packageName);
+                            ((AppIconView) cFragment.mAppGrid.getChildAt(child)).setCounterOverlay((cnt > 3 ? cnt - 1 : cnt)); // Ugly hack, to deal with grouped notifications
                         } else {
                             ((AppIconView) cFragment.mAppGrid.getChildAt(child)).removeOverlay();
                         }

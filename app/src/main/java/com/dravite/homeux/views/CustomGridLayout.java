@@ -57,6 +57,7 @@ import com.dravite.homeux.views.helpers.CheckForLongPressHelper;
 
 import java.lang.ref.SoftReference;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
@@ -1021,13 +1022,11 @@ public class CustomGridLayout extends GridLayout implements View.OnLongClickList
 
         if(child instanceof AppIconView) {
             boolean showLabels = mPreferences.getBoolean(Const.Defaults.TAG_SHOW_LABELS, Const.Defaults.getBoolean(Const.Defaults.TAG_SHOW_LABELS));
-            if((data instanceof Application && notificationsEnabled && ((LauncherActivity)getContext()).mStatusBarNotifications.contains(((Application) data)
-                    .info.getComponentName().getPackageName()))){
-                int count = ((LauncherActivity)getContext()).mStatusBarNotificationCounts[((LauncherActivity)getContext()).mStatusBarNotifications.indexOf(((Application) data)
-                        .info.getComponentName().getPackageName())];
-                if(count==0)
-                    count++;
-                ((AppIconView) child).setCounterOverlay(count);
+            String packageName = ((Application) data).info.getComponentName().getPackageName();
+            ArrayList<String> notificationList = ((LauncherActivity)getContext()).mStatusBarNotifications;
+            if((data instanceof Application && notificationsEnabled && notificationList.contains(packageName))){
+                int count = Collections.frequency(notificationList, packageName);
+                ((AppIconView) child).setCounterOverlay((count > 3 ? count - 1 : count)); // Ugly hack, to deal with grouped notifications
             } else {
                 ((AppIconView) child).removeOverlay();
             }
@@ -1773,11 +1772,11 @@ public class CustomGridLayout extends GridLayout implements View.OnLongClickList
             @Override
             public void onViewCreated(View view) {
                 if(view instanceof AppIconView) {
-                    if((d instanceof Application && notificationsEnabled && ((LauncherActivity)getContext()).mStatusBarNotifications.contains(((Application) d).info.getComponentName().getPackageName()))){
-                        int count = ((LauncherActivity)getContext()).mStatusBarNotificationCounts[((LauncherActivity)getContext()).mStatusBarNotifications.indexOf(((Application) d).info.getComponentName().getPackageName())];
-                        if(count==0)
-                            count++;
-                        ((AppIconView) view).setCounterOverlay(count);
+                    ArrayList<String> notificationsList = ((LauncherActivity)getContext()).mStatusBarNotifications;
+                    String packageName = ((Application) d).info.getComponentName().getPackageName();
+                    if((d instanceof Application && notificationsEnabled && notificationsList.contains(packageName))){
+                        int count = Collections.frequency(notificationsList, packageName);
+                        ((AppIconView) view).setCounterOverlay((count > 3 ? count - 1 : count)); // Ugly hack, to deal with grouped notifications
                     } else {
                         ((AppIconView) view).removeOverlay();
                     }
