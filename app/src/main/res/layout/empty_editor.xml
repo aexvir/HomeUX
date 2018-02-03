@@ -23,15 +23,14 @@
             android:text="New Folder"
             android:textAppearance="?android:attr/textAppearanceSmall"
             android:textColor="@android:color/white" />
+
     </RelativeLayout>
 
     <FrameLayout
         android:id="@+id/content"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="1">
-
-    </FrameLayout>
+        android:layout_weight="1" />
 
     <RelativeLayout
         android:id="@+id/buttonPanel"

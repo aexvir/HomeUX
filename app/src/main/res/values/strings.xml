@@ -295,4 +295,8 @@
         <item>zoomout</item>
         <item>individual</item>
     </string-array>
+    <string name="notification_badge_corner_radius">Corner radius</string>
+    <string name="notification_badge_background_color">Background color</string>
+    <string name="notification_badge_text_color">Text color</string>
+    <string name="app_notification_badge_design">Notification badge design</string>
 </resources>

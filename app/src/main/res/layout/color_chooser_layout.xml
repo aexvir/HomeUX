@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/colorLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -19,7 +20,7 @@
         android:layout_marginLeft="8dp"
         android:singleLine="true" />
 
-    <SeekBar
+    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
         android:id="@+id/value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -28,9 +29,10 @@
         android:layout_marginBottom="16dp"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:thumbTint="@color/colorPrimary"
-        android:progressTint="@color/colorPrimary"
-        android:max="1000" />
+        app:dsb_indicatorColor="@color/colorPrimary"
+        app:dsb_progressColor="@color/colorPrimary"
+        app:dsb_max="1000"
+        />
 
     <TextView
         android:id="@+id/valueLabel"
@@ -43,7 +45,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/brightness" />
 
-    <SeekBar
+    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
         android:id="@+id/saturation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -51,9 +53,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:thumbTint="@color/colorPrimary"
-        android:progressTint="@color/colorPrimary"
-        android:max="1000" />
+        app:dsb_indicatorColor="@color/colorPrimary"
+        app:dsb_progressColor="@color/colorPrimary"
+        app:dsb_max="1000"
+        />
 
     <TextView
         android:id="@+id/saturationLabel"
@@ -66,7 +69,7 @@
         android:layout_marginTop="8dp"
         android:text="@string/saturation" />
 
-    <SeekBar
+    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
         android:id="@+id/hue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -74,9 +77,10 @@
         android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:thumbTint="@color/colorPrimary"
-        android:progressTint="@color/colorPrimary"
-        android:max="360" />
+        app:dsb_indicatorColor="@color/colorPrimary"
+        app:dsb_progressColor="@color/colorPrimary"
+        app:dsb_max="360"
+        />
 
     <TextView
         android:id="@+id/colorLabel"

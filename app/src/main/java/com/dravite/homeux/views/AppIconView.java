@@ -1,16 +1,19 @@
 package com.dravite.homeux.views;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
+import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.ViewConfiguration;
 import android.widget.Button;
 
+import com.dravite.homeux.R;
 import com.dravite.homeux.views.helpers.CheckForLongPressHelper;
 import com.dravite.homeux.Const;
 import com.dravite.homeux.LauncherUtils;
@@ -44,9 +47,15 @@ public class AppIconView extends Button {
 
     //The counter overlay value
     int mCounterValue = 0;
+    int mCounterRadius = 0;
+    int mCounterBackgroundColor = Color.WHITE;
+    int mCounterTextColor = Color.BLACK;
 
     //Icon clip bounds
     Rect mRect = new Rect();
+
+    // Shared preferences
+    SharedPreferences mPreferences;
 
     public AppIconView(Context context){
         this(context, null);
@@ -68,10 +77,12 @@ public class AppIconView extends Button {
 
     public AppIconView(Context context, AttributeSet attrs, int defStyleAttr, int defStyleRes){
         super(context, attrs, defStyleAttr, defStyleRes);
+        mPreferences = PreferenceManager.getDefaultSharedPreferences(this.getContext());
         mLongPressHelper = new CheckForLongPressHelper(this);
         mLongPressHelper.setLongPressTimeout(200);
         setWillNotDraw(true);
         setCompoundDrawablePadding(LauncherUtils.dpToPx(-1, getContext()));
+        setLayerType(LAYER_TYPE_SOFTWARE, null);
     }
 
     @Override
@@ -128,7 +139,13 @@ public class AppIconView extends Button {
             return;
         }
         mCounterValue = counterValue;
-        mOverlay = new TextDrawable(String.valueOf(counterValue), LauncherUtils.dpToPx(4, getContext()), LauncherUtils.dpToPx(8, getContext()));//new TextDrawable(String.valueOf(counterValue));
+        mOverlay = new TextDrawable(
+            String.valueOf(counterValue),
+            mPreferences.getInt(Const.Defaults.TAG_NOTIFICATIONS_RADIUS, getResources().getInteger(R.integer.notification_badge_radius)),
+            LauncherUtils.dpToPx(mPreferences.getInt(Const.Defaults.TAG_NOTIFICATIONS_PADDING, getResources().getInteger(R.integer.notification_badge_padding)), getContext()),
+            mPreferences.getInt(Const.Defaults.TAG_NOTIFICATIONS_TEXT_COLOR, getResources().getColor(R.color.notificationBadgeText)),
+            mPreferences.getInt(Const.Defaults.TAG_NOTIFICATIONS_BACKGROUND_COLOR, getResources().getColor(R.color.notificationBadgeBackground))
+        );
         invalidate();
     }
 

@@ -22,6 +22,10 @@ public class Const {
         public static final String TAG_ICON_SIZE = "iconsize";
         public static final String TAG_SHOW_LABELS = "showLabels";
         public static final String TAG_NOTIFICATIONS = "notifications";
+        public static final String TAG_NOTIFICATIONS_RADIUS = "noticornerradius";
+        public static final String TAG_NOTIFICATIONS_PADDING = "notipadding";
+        public static final String TAG_NOTIFICATIONS_BACKGROUND_COLOR = "notibackgroundcolor";
+        public static final String TAG_NOTIFICATIONS_TEXT_COLOR = "notitextcolor";
         public static final String TAG_HIDE_CARDS = "hidecards";
         public static final String TAG_DISABLE_WALLPAPER_SCROLL = "disablewallpaperscroll";
         public static final String TAG_TRANSFORMER_INT = "transformerINT";
@@ -70,6 +74,11 @@ public class Const {
             defMap.put(TAG_QA_FAB_CLS, "");
             defMap.put(TAG_QA_FAB_PKG, "");
             defMap.put(TAG_NOTIFICATIONS, false);
+            defMap.put(TAG_NOTIFICATIONS_RADIUS, 32);
+            defMap.put(TAG_NOTIFICATIONS_PADDING, 6);
+            defMap.put(TAG_NOTIFICATIONS_BACKGROUND_COLOR, R.color.dark_gray);
+            // TODO: Define correct color
+            defMap.put(TAG_NOTIFICATIONS_TEXT_COLOR, R.color.cardview_light_background);
             defMap.put(TAG_ICON_PACK, "");
             defMap.put(TAG_HIDE_ALL, false);
             defMap.put(TAG_LICENSED, false);
