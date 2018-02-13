@@ -3,7 +3,10 @@ package com.dravite.homeux.general_helpers;
 import android.app.WallpaperManager;
 import android.content.Context;
 import android.graphics.PointF;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.os.IBinder;
+import android.support.v7.graphics.Palette;
 
 /**
  * A helper class that holds a wallpaper manager and retrieves it's offsets as it's not possible with the default one.
@@ -17,6 +20,16 @@ public class CustomWallpaperManager {
 
     public CustomWallpaperManager(Context context){
         mWallpaperManager = WallpaperManager.getInstance(context);
+    }
+
+    public Palette getWallpaperPalette() {
+        if (mWallpaperManager.getWallpaperInfo() != null) {
+            // We can't extract colors from live wallpapers, so just use the default color always.
+            return null;
+        } else {
+            Drawable mWallpaper = mWallpaperManager.getDrawable();
+            return Palette.from(((BitmapDrawable) mWallpaper).getBitmap()).generate();
+        }
     }
 
     /**

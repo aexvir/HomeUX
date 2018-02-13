@@ -25,6 +25,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
@@ -93,6 +94,7 @@ public class FolderEditorActivity extends AppCompatActivity {
 
     private int requestCode = REQUEST_EDIT_FOLDER;
     private int folderIndex = 0;
+    private int[] paletteColors = new int[0];
     private boolean mHasChanged = false;
     boolean hasImageChanged = false;
 
@@ -164,7 +166,6 @@ public class FolderEditorActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_folder_editor_new);
 
@@ -189,6 +190,7 @@ public class FolderEditorActivity extends AppCompatActivity {
         //loadAll Folder
         requestCode = getIntent().getIntExtra("requestCode", REQUEST_EDIT_FOLDER);
         folderIndex = getIntent().getIntExtra("folderIndex", 0);
+        paletteColors = getIntent().getIntArrayExtra("wallpaperPalette");
         if(FolderPasser.passFolder==null||FolderPasser.passFolder.get()==null){
 
             //If null, create a new folder.
@@ -286,15 +288,21 @@ public class FolderEditorActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialog, int which) {
                                 switch (which) {
                                     case 0:
-                                        new ColorDialog(FolderEditorActivity.this, getString(R.string.dialog_primary_color), 0xffF44336, new ColorWatcher() {
-                                            @Override
-                                            public void onColorSubmitted(int color) {
-                                                hasImageChanged = true;
-                                                mCurrentPanelImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
-                                                mCurrentPanelImage.eraseColor(color);
-                                                ((ImageView)findViewById(R.id.circlePrimary)).setImageBitmap(mCurrentPanelImage);
-                                            }
-                                        }).show();
+                                        new ColorDialog(
+                                            FolderEditorActivity.this,
+                                            getString(R.string.dialog_primary_color),
+                                            0xffF44336,
+                                            new ColorWatcher() {
+                                                @Override
+                                                public void onColorSubmitted(int color) {
+                                                    hasImageChanged = true;
+                                                    mCurrentPanelImage = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888);
+                                                    mCurrentPanelImage.eraseColor(color);
+                                                    ((ImageView)findViewById(R.id.circlePrimary)).setImageBitmap(mCurrentPanelImage);
+                                                }
+                                            },
+                                            paletteColors
+                                        ).show();
                                         break;
                                     case 1:
                                         Intent i = new Intent(Intent.ACTION_PICK);
@@ -314,13 +322,19 @@ public class FolderEditorActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 mHasChanged=true;
-                new ColorDialog(FolderEditorActivity.this, getString(R.string.dialog_accent_color), mCurrentAccent, new ColorWatcher() {
-                    @Override
-                    public void onColorSubmitted(int color) {
-                        setColor(color);
-                        mCurrentAccent = color;
-                    }
-                }).show();
+                new ColorDialog(
+                    FolderEditorActivity.this,
+                    getString(R.string.dialog_accent_color),
+                    mCurrentAccent,
+                    new ColorWatcher() {
+                        @Override
+                        public void onColorSubmitted(int color) {
+                            setColor(color);
+                            mCurrentAccent = color;
+                        }
+                    },
+                    paletteColors
+                ).show();
             }
         });
 

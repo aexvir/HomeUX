@@ -104,6 +104,7 @@ import com.dravite.homeux.views.viewcomponents.ProgressFadeDrawable;
 import com.dravite.homeux.views.viewcomponents.RectOutlineProvider;
 import com.dravite.homeux.views.viewcomponents.RevealOutlineProvider;
 import com.dravite.homeux.welcome.WelcomeActivity;
+import com.google.common.primitives.Ints;
 
 import org.xml.sax.SAXException;
 
@@ -173,6 +174,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     private ImageButton mSearchBackButton;      //The back button of the search layout
     private EditText mSearchInput;           //The text input of the search layout
     private SearchResultAdapter mSearchResultAdapter;   //The search result list adapter
+    private List<Integer> mPaletteColors = new ArrayList<Integer>();
     Rect mDropFabRect = new Rect();  //The bounding box of the FolderDrop FAB
     public FolderDropAdapter mFolderDropAdapter;   //The Adapter for the FolderDrop list
     boolean isInFolderView = false; //Flag to show if the FolderDrop list is currently opened.
@@ -206,6 +208,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
                 FolderEditorActivity.FolderPasser.passFolder = new WeakReference<>(newFolder);
                 Intent intent = new Intent(LauncherActivity.this, FolderEditorActivity.class);
                 intent.putExtra("requestCode", FolderEditorActivity.REQUEST_ADD_FOLDER);
+                intent.putExtra("wallpaperPalette", Ints.toArray(mPaletteColors));
                 LauncherUtils.startActivityForResult(LauncherActivity.this, v, intent, FolderEditorActivity.REQUEST_ADD_FOLDER);
             } else {
                 if (mPreferences.getBoolean(Const.Defaults.TAG_SWITCH_CONFIG, Const.Defaults.getBoolean(Const.Defaults.TAG_SWITCH_CONFIG))) {
@@ -384,6 +387,22 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
             mFolderStructure = JsonHelper.loadFolderStructure(this, mDrawerTree, mHolder);
 
         mWallpaperManager = new CustomWallpaperManager(this);
+        Palette mWallpaperColors = mWallpaperManager.getWallpaperPalette();
+
+        for(Palette.Swatch s : mWallpaperColors.getSwatches()) {
+            Log.d("acv", ColorUtils.HSLtoColor(s.getHsl()) + "");
+            mPaletteColors.add(ColorUtils.HSLtoColor(s.getHsl()));
+        }
+
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putInt(
+            Const.Defaults.TAG_NOTIFICATIONS_BACKGROUND_COLOR,
+            mWallpaperColors.getDarkVibrantColor(getResources().getColor(R.color.notificationBadgeBackground))
+        ).apply();
+
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putInt(
+            Const.Defaults.TAG_NOTIFICATIONS_TEXT_COLOR,
+            mWallpaperColors.getLightVibrantColor(getResources().getColor(R.color.notificationBadgeText))
+        ).apply();
     }
 
     /**
@@ -408,6 +427,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
         mSearchBackButton = (ImageButton) findViewById(R.id.searchBackButton);
         mSearchInput = (EditText) findViewById(R.id.searchInput);
         mSearchResultLayout = findViewById(R.id.searchResultLayout);
+
     }
 
     @Override
@@ -471,6 +491,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
                         Intent intent = new Intent(LauncherActivity.this, FolderEditorActivity.class);
                         intent.putExtra("requestCode", FolderEditorActivity.REQUEST_EDIT_FOLDER);
                         intent.putExtra("folderIndex", mFolderStructure.folders.indexOf(folderName));
+                        intent.putExtra("wallpaperPalette", Ints.toArray(mPaletteColors));
 
                         LauncherUtils.startActivityForResult(LauncherActivity.this, button, intent, FolderEditorActivity.REQUEST_EDIT_FOLDER);
                     }
@@ -987,8 +1008,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
             }
 
             @Override
-            public void onPageScrollStateChanged(int state) {
-            }
+            public void onPageScrollStateChanged(int state) {}
         });
 
         //Fit CoordinatorLayout to Window
@@ -1074,8 +1094,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
         //live search
         mSearchInput.addTextChangedListener(new TextWatcher() {
             @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
@@ -1088,8 +1107,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
             }
 
             @Override
-            public void afterTextChanged(Editable s) {
-            }
+            public void afterTextChanged(Editable s) {}
         });
 
     }

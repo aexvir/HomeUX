@@ -1,29 +1,75 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:theme="@android:style/Theme.Material.Light" >
+    
+    <RelativeLayout
+        android:id="@+id/notificationBadgePreview"
+        android:layout_width="128dp"
+        android:layout_height="128dp"
+        android:layout_marginTop="16dp"
+        android:layout_centerHorizontal="true" >
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="96dp"
+            android:layout_marginTop="16dp"
+            android:src="@drawable/web_hi_res_512" />
+
+        <ImageView
+            android:id="@+id/notificationBadgePreviewBackground"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginLeft="64dp"
+            android:elevation="4dp"
+            android:background="@drawable/notification_badge" />
+
+        <TextView
+            android:id="@+id/notificationBadgePreviewText"
+            android:layout_width="48dp"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginLeft="73dp"
+            android:text="99+"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:elevation="5dp"
+            android:textColor="@color/notificationBadgeText" />
+
+    </RelativeLayout>
 
     <TextView
-        android:id="@+id/cornerRadiusLabel"
+        android:id="@+id/notificationBadgeCornerRadiusLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="22dp"
         android:layout_marginRight="22dp"
-        android:layout_marginTop="16dp"
+        android:layout_below="@id/notificationBadgePreview"
         android:text="@string/notification_badge_corner_radius" />
 
     <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-        android:id="@+id/cornerRadius"
+        android:id="@+id/notificationBadgeCornerRadius"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
-        android:layout_below="@id/cornerRadiusLabel"
+        android:layout_below="@id/notificationBadgeCornerRadiusLabel"
         app:dsb_indicatorColor="@color/colorPrimary"
         app:dsb_max="@integer/max_notification_badge_radius"
         app:dsb_progressColor="@color/colorPrimary" />
+
+    <TextView
+        android:id="@+id/notificationBadgeColorLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="22dp"
+        android:layout_marginRight="22dp"
+        android:layout_below="@id/notificationBadgeCornerRadius"
+        android:text="Colors" />
 
 </RelativeLayout>
