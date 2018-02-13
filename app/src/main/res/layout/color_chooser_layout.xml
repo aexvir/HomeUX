@@ -3,66 +3,89 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/colorLayout"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:theme="@android:style/Theme.Material.Light"
     tools:context=".LauncherActivity">
 
-    <EditText
-        android:id="@+id/hexValue"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/value"
-        android:hint="Hex value"
-        android:layout_toStartOf="@+id/submitButton"
-        android:imeOptions="actionDone"
-        android:background="@android:color/transparent"
-        android:layout_marginLeft="8dp"
-        android:singleLine="true" />
-
-    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-        android:id="@+id/value"
+    <View
+        android:id="@+id/colorView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@+id/hexValue"
-        android:layout_alignParentBottom="false"
-        android:layout_marginBottom="16dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginRight="8dp"
-        app:dsb_indicatorColor="@color/colorPrimary"
-        app:dsb_progressColor="@color/colorPrimary"
-        app:dsb_max="1000"
-        />
+        android:layout_height="128dp"
+        android:layout_alignParentTop="true"
+        android:background="#93949f" />
 
     <TextView
-        android:id="@+id/valueLabel"
+        android:id="@+id/presetsLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/value"
-        android:layout_alignParentTop="false"
+        android:layout_below="@id/colorView"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Presets" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/presets"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/presetsLabel"
+        android:layout_marginTop="8dp"
+        android:paddingRight="16dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager" />
+
+    <TextView
+        android:id="@+id/paletteColorsLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/presets"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:text="Wallpaper palette"
+        android:visibility="gone" />
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/paletteColors"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:layout_below="@+id/paletteColorsLabel"
+        android:layout_marginTop="8dp"
+        android:paddingRight="16dp"
+        android:clipToPadding="false"
+        android:orientation="horizontal"
+        app:layoutManager="android.support.v7.widget.LinearLayoutManager"
+        android:visibility="gone" />
+
+    <TextView
+        android:id="@+id/colorLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/paletteColors"
+        android:layout_alignParentStart="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/brightness" />
+        android:text="@string/color" />
 
     <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-        android:id="@+id/saturation"
+        android:id="@+id/hue"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/valueLabel"
+        android:layout_below="@+id/colorLabel"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:dsb_indicatorColor="@color/colorPrimary"
         app:dsb_progressColor="@color/colorPrimary"
-        app:dsb_max="1000"
-        />
+        app:dsb_max="360" />
 
     <TextView
         android:id="@+id/saturationLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/saturation"
+        android:layout_below="@+id/hue"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
@@ -70,54 +93,53 @@
         android:text="@string/saturation" />
 
     <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
-        android:id="@+id/hue"
+        android:id="@+id/saturation"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/saturationLabel"
+        android:layout_below="@+id/saturationLabel"
         android:layout_alignParentStart="true"
         android:layout_marginLeft="8dp"
         android:layout_marginRight="8dp"
         app:dsb_indicatorColor="@color/colorPrimary"
         app:dsb_progressColor="@color/colorPrimary"
-        app:dsb_max="360"
-        />
+        app:dsb_max="1000" />
 
     <TextView
-        android:id="@+id/colorLabel"
+        android:id="@+id/valueLabel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/hue"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/saturation"
+        android:layout_alignParentTop="false"
         android:layout_marginLeft="16dp"
         android:layout_marginRight="16dp"
         android:layout_marginTop="8dp"
-        android:text="@string/color" />
+        android:text="@string/brightness" />
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/presets"
-        android:layout_width="48dp"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/colorLabel"
-        android:layout_alignParentRight="true" />
-
-    <View
-        android:id="@+id/colorView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@+id/colorLabel"
-        android:layout_toLeftOf="@+id/presets"
-        android:background="#93949f" />
-
-    <Button
-        android:id="@+id/switchTo"
+    <org.adw.library.widgets.discreteseekbar.DiscreteSeekBar
+        android:id="@+id/value"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentStart="false"
-        android:layout_alignParentTop="false"
-        android:layout_alignTop="@+id/colorView"
-        android:layout_toStartOf="@+id/presets"
-        android:background="?android:attr/selectableItemBackground"
-        android:text="Switch to accent" />
+        android:layout_below="@+id/valueLabel"
+        android:layout_alignParentBottom="false"
+        android:layout_marginBottom="16dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginRight="8dp"
+        app:dsb_indicatorColor="@color/colorPrimary"
+        app:dsb_progressColor="@color/colorPrimary"
+        app:dsb_max="1000" />
+
+    <EditText
+        android:id="@+id/hexValue"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:layout_alignStart="@+id/value"
+        android:hint="Hex value"
+        android:layout_toStartOf="@+id/submitButton"
+        android:imeOptions="actionDone"
+        android:background="@android:color/transparent"
+        android:layout_marginLeft="8dp"
+        android:singleLine="true"
+        android:layout_below="@id/value"/>
 
     <ImageButton
         android:id="@+id/submitButton"
@@ -129,5 +151,12 @@
         android:tint="@android:color/white"
         android:src="@drawable/ic_okay" />
 
+    <Button
+        android:id="@+id/switchTo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?android:attr/selectableItemBackground"
+        android:text="Switch to accent"
+        android:visibility="gone"/>
 
 </RelativeLayout>

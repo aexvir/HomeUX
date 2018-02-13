@@ -574,7 +574,7 @@ public class SettingsActivity extends SettingsBaseActivity {
             int cornerRadiusValue = preferences.getInt(Defaults.TAG_NOTIFICATIONS_RADIUS, getResources().getInteger(R.integer.notification_badge_radius));
             notificationBadgeSettings.put("radius", cornerRadiusValue);
 
-            DiscreteSeekBar cornerRadius = dialog.findViewById(R.id.cornerRadius);
+            DiscreteSeekBar cornerRadius = dialog.findViewById(R.id.notificationBadgeCornerRadius);
             cornerRadius.setProgress(cornerRadiusValue);
 
             cornerRadius.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {

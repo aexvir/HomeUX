@@ -94,6 +94,8 @@ public class AppIconView extends Button {
             mOverlay.setBounds(mRect);
             mOverlay.draw(canvas);
         }
+
+        //setCounterOverlay(20);
     }
 
     /**
