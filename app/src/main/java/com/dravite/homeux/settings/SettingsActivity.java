@@ -11,15 +11,18 @@ import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
+import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.dravite.homeux.LauncherUtils;
 import com.dravite.homeux.settings.clock.ActivityClockSettings;
 import com.dravite.homeux.general_helpers.FileManager;
 import com.dravite.homeux.settings.backup_restore.BackupRestoreActivity;
@@ -556,7 +559,7 @@ public class SettingsActivity extends SettingsBaseActivity {
         public void onClick(View v, BaseItem item, RecyclerView.Adapter adapter, int position) {
             final HashMap<String, Integer> notificationBadgeSettings = new HashMap<>();
 
-            Dialog dialog = new AlertDialog.Builder(SettingsActivity.this, R.style.DialogTheme)
+            final Dialog dialog = new AlertDialog.Builder(SettingsActivity.this, R.style.DialogTheme)
                     .setTitle(R.string.app_notification_badge_design)
                     .setView(R.layout.notification_badge_dialog)
                     .setPositiveButton(android.R.string.ok, new DialogInterface.OnClickListener() {
@@ -574,13 +577,17 @@ public class SettingsActivity extends SettingsBaseActivity {
             int cornerRadiusValue = preferences.getInt(Defaults.TAG_NOTIFICATIONS_RADIUS, getResources().getInteger(R.integer.notification_badge_radius));
             notificationBadgeSettings.put("radius", cornerRadiusValue);
 
+            final GradientDrawable mNotificationBadgeBackground = (GradientDrawable) dialog.findViewById(R.id.notificationBadgePreviewBackground).getBackground();
+
             DiscreteSeekBar cornerRadius = dialog.findViewById(R.id.notificationBadgeCornerRadius);
             cornerRadius.setProgress(cornerRadiusValue);
+            mNotificationBadgeBackground.setCornerRadius(LauncherUtils.dpToPx(((float) cornerRadiusValue / 100) * 16, SettingsActivity.this));
 
             cornerRadius.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
                 @Override
                 public void onProgressChanged(DiscreteSeekBar seekBar, int value, boolean fromUser) {
                     notificationBadgeSettings.put("radius", value);
+                    mNotificationBadgeBackground.setCornerRadius(LauncherUtils.dpToPx(((float) value / 100) * 16, SettingsActivity.this));
                 }
 
                 @Override
