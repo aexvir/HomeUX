@@ -577,11 +577,18 @@ public class SettingsActivity extends SettingsBaseActivity {
             int cornerRadiusValue = preferences.getInt(Defaults.TAG_NOTIFICATIONS_RADIUS, getResources().getInteger(R.integer.notification_badge_radius));
             notificationBadgeSettings.put("radius", cornerRadiusValue);
 
+            int notificationBadgeCurrentBackgroundColor = preferences.getInt(Defaults.TAG_NOTIFICATIONS_BACKGROUND_COLOR, getResources().getColor(R.color.notificationBadgeBackground));
+            int notificationBadgeCurrentTextColor = preferences.getInt(Defaults.TAG_NOTIFICATIONS_TEXT_COLOR, getResources().getColor(R.color.notificationBadgeText));
+
             final GradientDrawable mNotificationBadgeBackground = (GradientDrawable) dialog.findViewById(R.id.notificationBadgePreviewBackground).getBackground();
+            mNotificationBadgeBackground.setCornerRadius(LauncherUtils.dpToPx(((float) cornerRadiusValue / 100) * 16, SettingsActivity.this));
+            mNotificationBadgeBackground.setColor(notificationBadgeCurrentBackgroundColor);
+
+            final TextView mNotificationBadgeText = dialog.findViewById(R.id.notificationBadgePreviewText);
+            mNotificationBadgeText.setTextColor(notificationBadgeCurrentTextColor);
 
             DiscreteSeekBar cornerRadius = dialog.findViewById(R.id.notificationBadgeCornerRadius);
             cornerRadius.setProgress(cornerRadiusValue);
-            mNotificationBadgeBackground.setCornerRadius(LauncherUtils.dpToPx(((float) cornerRadiusValue / 100) * 16, SettingsActivity.this));
 
             cornerRadius.setOnProgressChangeListener(new DiscreteSeekBar.OnProgressChangeListener() {
                 @Override
