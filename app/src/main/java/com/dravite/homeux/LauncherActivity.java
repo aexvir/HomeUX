@@ -132,6 +132,7 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     public static final int ANIM_DURATION_DEFAULT = 170;      //Default anim time in ms
     public static final int MAX_OFFSCREEN_FOLDERS = 100;      //Max non-visible folders
     public static final int THREAD_COUNT = 16;       //Thread count for the mStaticParallelThreadPool
+    public static final int REQUEST_CHANGE_WALLPAPER = 50;
 
     @SuppressWarnings("unused")
     private static final String TAG = "LauncherActivity"; //Log Tag
@@ -387,10 +388,14 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
             mFolderStructure = JsonHelper.loadFolderStructure(this, mDrawerTree, mHolder);
 
         mWallpaperManager = new CustomWallpaperManager(this);
+    }
+
+    public void generateWallpaperPalette() {
+        Log.d("acv", "Generating palette...");
+        mPaletteColors.clear();
         Palette mWallpaperColors = mWallpaperManager.getWallpaperPalette();
 
         for(Palette.Swatch s : mWallpaperColors.getSwatches()) {
-            Log.d("acv", ColorUtils.HSLtoColor(s.getHsl()) + "");
             mPaletteColors.add(ColorUtils.HSLtoColor(s.getHsl()));
         }
 
@@ -1705,8 +1710,12 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
+        Log.d("acv", "onActivityResult " + requestCode + " : " + resultCode);
 
         switch (requestCode) {
+            case LauncherActivity.REQUEST_CHANGE_WALLPAPER:
+                generateWallpaperPalette();
+                break;
             case FolderEditorAddActivity.REQUEST_APP_LIST_MAIN:
                 if (resultCode == RESULT_OK) {
                     onAddAppsRequest();

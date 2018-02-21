@@ -45,7 +45,6 @@ class ColorDialog @JvmOverloads constructor(private val mContext: Context, priva
         if(colorSet != null) {
             mColorSet.addAll(colorSet.toTypedArray())
             mColorSet.sort()
-            Log.d("acv", "colorSet -> ${colorSet.size}, mColorSet -> ${mColorSet.size}")
         }
 
         mDialog.setContentView(mContent)
@@ -195,8 +194,6 @@ class ColorDialog @JvmOverloads constructor(private val mContext: Context, priva
         for(i in mColorSet) {
             ret += i
         }
-
-        Log.d("acv", "Length ${mColorSet.size} -> $ret")
 
         if(mColorSet.isNotEmpty()) {
             val palette = colorChooser.findViewById<View>(R.id.paletteColors) as RecyclerView
