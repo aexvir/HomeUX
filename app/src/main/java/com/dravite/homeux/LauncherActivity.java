@@ -391,7 +391,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     }
 
     public void generateWallpaperPalette() {
-        Log.d("acv", "Generating palette...");
         mPaletteColors.clear();
         Palette mWallpaperColors = mWallpaperManager.getWallpaperPalette();
 
@@ -1710,7 +1709,6 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, final Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        Log.d("acv", "onActivityResult " + requestCode + " : " + resultCode);
 
         switch (requestCode) {
             case LauncherActivity.REQUEST_CHANGE_WALLPAPER:
