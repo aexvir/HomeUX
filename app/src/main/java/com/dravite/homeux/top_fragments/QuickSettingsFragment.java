@@ -11,6 +11,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -141,7 +142,7 @@ public class QuickSettingsFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_SET_WALLPAPER);
-                LauncherUtils.startActivity(mainActivity, v, intent);
+                LauncherUtils.startActivityForResult(mainActivity, v, intent, LauncherActivity.REQUEST_CHANGE_WALLPAPER);
             }
         });
     }
