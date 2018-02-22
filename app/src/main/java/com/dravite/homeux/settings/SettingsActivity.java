@@ -15,6 +15,7 @@ import android.graphics.drawable.GradientDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.widget.AppCompatButton;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,9 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.dravite.homeux.LauncherUtils;
+import com.dravite.homeux.general_dialogs.ColorDialog;
+import com.dravite.homeux.general_dialogs.helpers.ColorWatcher;
+import com.dravite.homeux.general_helpers.ColorUtils;
 import com.dravite.homeux.settings.clock.ActivityClockSettings;
 import com.dravite.homeux.general_helpers.FileManager;
 import com.dravite.homeux.settings.backup_restore.BackupRestoreActivity;
@@ -577,7 +581,7 @@ public class SettingsActivity extends SettingsBaseActivity {
             int cornerRadiusValue = preferences.getInt(Defaults.TAG_NOTIFICATIONS_RADIUS, getResources().getInteger(R.integer.notification_badge_radius));
             notificationBadgeSettings.put("radius", cornerRadiusValue);
 
-            int notificationBadgeCurrentBackgroundColor = preferences.getInt(Defaults.TAG_NOTIFICATIONS_BACKGROUND_COLOR, getResources().getColor(R.color.notificationBadgeBackground));
+            final int notificationBadgeCurrentBackgroundColor = preferences.getInt(Defaults.TAG_NOTIFICATIONS_BACKGROUND_COLOR, getResources().getColor(R.color.notificationBadgeBackground));
             int notificationBadgeCurrentTextColor = preferences.getInt(Defaults.TAG_NOTIFICATIONS_TEXT_COLOR, getResources().getColor(R.color.notificationBadgeText));
 
             final GradientDrawable mNotificationBadgeBackground = (GradientDrawable) dialog.findViewById(R.id.notificationBadgePreviewBackground).getBackground();
@@ -586,6 +590,32 @@ public class SettingsActivity extends SettingsBaseActivity {
 
             final TextView mNotificationBadgeText = dialog.findViewById(R.id.notificationBadgePreviewText);
             mNotificationBadgeText.setTextColor(notificationBadgeCurrentTextColor);
+
+            final AppCompatButton mNotificationButtonBackgroundColorButton = dialog.findViewById(R.id.notificationBadgeBackgroundColorChooser);
+            final AppCompatButton mNotificationButtonTextColorButton = dialog.findViewById(R.id.notificationBadgeTextColorChooser);
+
+            mNotificationButtonBackgroundColorButton.setBackgroundTintList(ColorStateList.valueOf(notificationBadgeCurrentBackgroundColor));
+            mNotificationButtonBackgroundColorButton.setTextColor(ColorUtils.getSuitableTextColor(notificationBadgeCurrentBackgroundColor));
+            mNotificationButtonTextColorButton.setBackgroundTintList(ColorStateList.valueOf(notificationBadgeCurrentTextColor));
+            mNotificationButtonTextColorButton.setTextColor(ColorUtils.getSuitableTextColor(notificationBadgeCurrentTextColor));
+
+            mNotificationButtonBackgroundColorButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new ColorDialog(
+                            SettingsActivity.this,
+                            "Background color",
+                            notificationBadgeCurrentBackgroundColor,
+                            new ColorWatcher() {
+                                @Override
+                                public void onColorSubmitted(int color) {
+                                    mNotificationButtonBackgroundColorButton.setBackgroundColor(color);
+                                }
+                            }
+                    );
+                }
+            });
+
 
             DiscreteSeekBar cornerRadius = dialog.findViewById(R.id.notificationBadgeCornerRadius);
             cornerRadius.setProgress(cornerRadiusValue);
