@@ -23,6 +23,7 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
+import com.dravite.homeux.Const;
 import com.dravite.homeux.LauncherUtils;
 import com.dravite.homeux.general_dialogs.ColorDialog;
 import com.dravite.homeux.general_dialogs.helpers.ColorWatcher;
@@ -582,7 +583,7 @@ public class SettingsActivity extends SettingsBaseActivity {
             notificationBadgeSettings.put("radius", cornerRadiusValue);
 
             final int notificationBadgeCurrentBackgroundColor = preferences.getInt(Defaults.TAG_NOTIFICATIONS_BACKGROUND_COLOR, getResources().getColor(R.color.notificationBadgeBackground));
-            int notificationBadgeCurrentTextColor = preferences.getInt(Defaults.TAG_NOTIFICATIONS_TEXT_COLOR, getResources().getColor(R.color.notificationBadgeText));
+            final int notificationBadgeCurrentTextColor = preferences.getInt(Defaults.TAG_NOTIFICATIONS_TEXT_COLOR, getResources().getColor(R.color.notificationBadgeText));
 
             final GradientDrawable mNotificationBadgeBackground = (GradientDrawable) dialog.findViewById(R.id.notificationBadgePreviewBackground).getBackground();
             mNotificationBadgeBackground.setCornerRadius(LauncherUtils.dpToPx(((float) cornerRadiusValue / 100) * 16, SettingsActivity.this));
@@ -609,13 +610,41 @@ public class SettingsActivity extends SettingsBaseActivity {
                             new ColorWatcher() {
                                 @Override
                                 public void onColorSubmitted(int color) {
-                                    mNotificationButtonBackgroundColorButton.setBackgroundColor(color);
+                                    mNotificationButtonBackgroundColorButton.setBackgroundTintList(ColorStateList.valueOf(color));
+                                    mNotificationButtonBackgroundColorButton.setTextColor(ColorUtils.getSuitableTextColor(color));
+                                    mNotificationBadgeBackground.setColor(color);
+                                    PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this).edit().putInt(
+                                            Const.Defaults.TAG_NOTIFICATIONS_BACKGROUND_COLOR,
+                                            color
+                                    ).apply();
                                 }
                             }
-                    );
+                    ).show();
                 }
             });
 
+            mNotificationButtonTextColorButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    new ColorDialog(
+                            SettingsActivity.this,
+                            "Text color",
+                            notificationBadgeCurrentTextColor,
+                            new ColorWatcher() {
+                                @Override
+                                public void onColorSubmitted(int color) {
+                                    mNotificationButtonTextColorButton.setBackgroundTintList(ColorStateList.valueOf(color));
+                                    mNotificationButtonTextColorButton.setTextColor(ColorUtils.getSuitableTextColor(color));
+                                    mNotificationBadgeText.setTextColor(color);
+                                    PreferenceManager.getDefaultSharedPreferences(SettingsActivity.this).edit().putInt(
+                                            Const.Defaults.TAG_NOTIFICATIONS_TEXT_COLOR,
+                                            color
+                                    ).apply();
+                                }
+                            }
+                    ).show();
+                }
+            });
 
             DiscreteSeekBar cornerRadius = dialog.findViewById(R.id.notificationBadgeCornerRadius);
             cornerRadius.setProgress(cornerRadiusValue);

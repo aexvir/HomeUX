@@ -163,6 +163,6 @@ object ColorUtils {
      */
     @JvmStatic
     fun getSuitableTextColor(background: Int): Int {
-        return if(isBrightColor(background)) Color.parseColor("#232323") else Color.parseColor("#f5f5f5i")
+        return if(isBrightColor(background)) Color.parseColor("#232323") else Color.parseColor("#f5f5f5")
     }
 }
