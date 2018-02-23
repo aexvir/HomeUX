@@ -46,12 +46,15 @@ import com.dravite.homeux.settings.items.CaptionSettingsItem;
 import com.dravite.homeux.settings.items.GenericSettingsItem;
 import com.dravite.homeux.settings.items.SwitchSettingsItem;
 import com.dravite.homeux.settings.settings_fragments.SettingsFragmentAdapter;
+import com.google.common.primitives.Ints;
+import com.google.gson.Gson;
 
 import org.adw.library.widgets.discreteseekbar.DiscreteSeekBar;
 
 import java.io.File;
 import java.lang.ref.Reference;
 import java.lang.ref.SoftReference;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -564,6 +567,15 @@ public class SettingsActivity extends SettingsBaseActivity {
         public void onClick(View v, BaseItem item, RecyclerView.Adapter adapter, int position) {
             final HashMap<String, Integer> notificationBadgeSettings = new HashMap<>();
 
+            final List<Integer> mPaletteColors = new ArrayList<Integer>();
+            String wallpaperPaletteColors = preferences.getString(Defaults.TAG_WALLPAPER_PALETTE, "");
+
+            if(wallpaperPaletteColors.length() > 0){
+                for(int c : new Gson().fromJson(wallpaperPaletteColors, int[].class)) {
+                    mPaletteColors.add(c);
+                }
+            }
+
             final Dialog dialog = new AlertDialog.Builder(SettingsActivity.this, R.style.DialogTheme)
                     .setTitle(R.string.app_notification_badge_design)
                     .setView(R.layout.notification_badge_dialog)
@@ -618,7 +630,8 @@ public class SettingsActivity extends SettingsBaseActivity {
                                             color
                                     ).apply();
                                 }
-                            }
+                            },
+                            Ints.toArray(mPaletteColors)
                     ).show();
                 }
             });
@@ -641,7 +654,8 @@ public class SettingsActivity extends SettingsBaseActivity {
                                             color
                                     ).apply();
                                 }
-                            }
+                            },
+                            Ints.toArray(mPaletteColors)
                     ).show();
                 }
             });
