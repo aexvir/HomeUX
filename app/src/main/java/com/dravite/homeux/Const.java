@@ -26,6 +26,7 @@ public class Const {
         public static final String TAG_NOTIFICATIONS_PADDING = "notipadding";
         public static final String TAG_NOTIFICATIONS_BACKGROUND_COLOR = "notibackgroundcolor";
         public static final String TAG_NOTIFICATIONS_TEXT_COLOR = "notitextcolor";
+        public static final String TAG_WALLPAPER_PALETTE = "wallpaperPalette";
         public static final String TAG_HIDE_CARDS = "hidecards";
         public static final String TAG_DISABLE_WALLPAPER_SCROLL = "disablewallpaperscroll";
         public static final String TAG_TRANSFORMER_INT = "transformerINT";

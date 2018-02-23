@@ -105,6 +105,7 @@ import com.dravite.homeux.views.viewcomponents.RectOutlineProvider;
 import com.dravite.homeux.views.viewcomponents.RevealOutlineProvider;
 import com.dravite.homeux.welcome.WelcomeActivity;
 import com.google.common.primitives.Ints;
+import com.google.gson.Gson;
 
 import org.xml.sax.SAXException;
 
@@ -397,6 +398,11 @@ public class LauncherActivity extends AppCompatActivity implements Observer {
         for(Palette.Swatch s : mWallpaperColors.getSwatches()) {
             mPaletteColors.add(ColorUtils.HSLtoColor(s.getHsl()));
         }
+
+        PreferenceManager.getDefaultSharedPreferences(this).edit().putString(
+            Const.Defaults.TAG_WALLPAPER_PALETTE,
+            new Gson().toJson(mPaletteColors)
+        ).apply();
 
         PreferenceManager.getDefaultSharedPreferences(this).edit().putInt(
             Const.Defaults.TAG_NOTIFICATIONS_BACKGROUND_COLOR,
